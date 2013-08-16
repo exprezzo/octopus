@@ -1,0 +1,16 @@
+/*
+#menu_categorias li a{	
+	background-image:url(../imagenes/btn_souvenir_left.png), url(../imagenes/btn_souvenir_bg.png), url(../imagenes/btn_souvenir_right.png);
+	background-repeat: no-repeat, repeat-x;
+	position:relative;
+}
+
+#menu_categorias li a:after{
+	background-image:url(../imagenes/btn_souvenir_right.png);
+	background-repeat: no-repeat;
+	content:'';
+	width:10px;
+	height:100%;
+	position:abbsolute;
+}
+*/
