@@ -1,0 +1,2 @@
+Copia todos los archivos de la carpeta a la raiz del sitio.
+en la carpeta portal, configura el archivo config.php.

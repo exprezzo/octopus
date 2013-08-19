@@ -1,0 +1,64 @@
+/* TABS */		
+/* .ui-tabs-nav{ min-height:47px; } */
+#tabs{padding:0 !important; border: none;}
+#tabs > .ui-tabs-nav{border-radius:0 !important; -webkit-border-radius:0 !important;}
+.link-salir{ position: absolute;right: 2px;top: 2px;background: none ;padding: 13px 10px 13px 10px;border: none;}
+#tabs >	ul.ui-tabs-nav li a{ background-size:32px; }
+#tabs >  ul.ui-tabs-nav li a {  padding-left: 38px !important; background-repeat: no-repeat;background-position:5px;	}
+ul.ui-tabs-nav li a.tabMenu{ background-image:url('http://png.findicons.com/files/icons/577/refresh_cl/48/taskbar_start_menu.png'); }
+.ui-icon.ui-icon-close{ right: 0; position: absolute; cursor:pointer; }
+
+/* .ui-tabs-nav{ min-height:47px; } */
+#tabs{padding:0 !important; border: none;}
+#tabs > .ui-tabs-nav{border-radius:0 !important; -webkit-border-radius:0 !important;}
+.link-salir{ position: absolute;right: 2px;top: 2px;background: none ;padding: 13px 10px 13px 10px;border: none;}
+#tabs >	ul.ui-tabs-nav li a{ background-size:32px; }
+#tabs >  ul.ui-tabs-nav li a {  padding-left: 38px !important; background-repeat: no-repeat;background-position:5px;	}
+ul.ui-tabs-nav li a.tabMenu{ background-image:url('http://png.findicons.com/files/icons/577/refresh_cl/48/taskbar_start_menu.png'); }
+
+.ribbon .ui-tabs-nav{display:none; }
+.ribbon .ui-button-icon-primary{top:5px;width:48px;height:48px;background-size:40px;background-repeat:no-repeat;background-position: 3px 4px;padding: 0;		}
+.ribbon .btnGuardar{ background-imagen:url('../images/token_dark_iconpack/oh.png') !important; }
+.ribbon .btnNuevo{ 	background-image:url('../images/token_dark_iconpack/word_processor.png') !important; }
+.ribbon .btnEditar{ 	background-image:url('../images/edit.png') !important; }
+.ribbon .btnEliminar{	background-image:url('../images/token_dark_iconpack/xion.png') !important; }
+.ribbon .btnImprimir{	background-image:url('../images/token_dark_iconpack/printer_and_fax.png') !important; }
+.ribbon .btnRefresh{	background-image:url('../images/token_dark_iconpack/playback_reload.png') !important; background-size: 29px; background-position: 10px;}
+.ribbon button{width:57px;}
+.ribbon .ui-button-text{ padding:0;}
+#tabs span.ui-button-text { padding-top:40px !important; background-repeat: no-repeat; background-position: top center; background-position:center 6px !important; }
+
+
+
+
+/* GRID */
+.wijmo-wijgrid-row{ height:36px; }
+/* PAGINADOR */
+li.ui-page{ padding:8px 15px 8px 15px; }
+
+/* Toolbar Edicion */
+.toolbarEdicion{padding:10px;}
+.toolbarEdicion .boton{ 	border-radius:9px;	border:#e3e2d9 1px solid;display: inline-block; padding: 10px 3px 10px 3px; cursor:pointer; }
+.toolbarEdicion  span{ margin-top: 5px;display: inline-block;border-radius: 6px;	padding: 0px 6px 0px 6px;border: #e3e2d9 1px solid;font-family:arial; color:white; font-size: 12px; font-family: cursive; font-weight: normal;}
+.iconWrap{	border: #9b9b9b 1px solid; display: inline-block; border-radius: 45px; padding: 2px; }
+.iconWrap .icon{ width: 20px;height: 20px; background-color: rgb(228, 226, 226); background-repeat: no-repeat; background-position: 50%; border-radius: 45px; padding: 3px; }
+.boton.btnNew .icon{ background: #8db817 url('../images/document_new.png') no-repeat scroll center;  }		
+.boton.btnNew span{background: #8db817; }	
+.boton.btnGuardar .icon{ background: white url('../images/save.png') no-repeat scroll center; width:21px; background-size:18px;}		
+.boton.btnGuardar .iconWrap{background:black;}
+.boton.btnGuardar span{background: black;color:white; }
+.boton.btnEdit .icon{background: #dbc512 url('../images/document_edit.png') no-repeat scroll center;}
+.boton.btnEdit span{background-color: #dbc512;}
+.boton.btnEmail .icon{background: #4f77b5 url('../images/pre_mail.png') no-repeat scroll center;}
+.boton.btnEmail span{background-color: #4f77b5;}
+.boton.btnPrint .icon{background: #9d9c9c url('../images/printer.png') no-repeat scroll center; opacity:.5;}
+.boton.btnPrint span{background-color: #9d9c9c;}
+.boton.btnDelete .icon{background: #d74e46 url('../images/delete.png') no-repeat scroll center;}
+.boton.btnDelete span{background-color: #d74e46;}
+.boton.btnAgregar .icon{background: white url('../images/add.png') no-repeat scroll center; background-size:18px;}
+.boton.btnAgregar .iconWrap{background:black;}
+.boton.btnAgregar span{background: black;color:white; }
+.boton.btnCancel .icon{background: #dbc512 url('../images/player_stop.png') no-repeat scroll center; background-size:16px;}
+.boton.btnCancel span{background-color: #dbc512;}
+
+.frmEdicion label{width:100px;display:inline-block;}

@@ -1,0 +1,27 @@
+<?php
+$CORE_PATH='../';
+require_once $CORE_PATH.'database.php';
+
+require_once 'PHPUnit.php';
+class DatabaseTestcase extends PHPUnit_TestCase{
+	 
+	 //==================================================================================
+	 // constructor of the test suite
+    /*function FCTestcase($name) {
+       $this->PHPUnit_TestCase($name);
+    }*/
+	
+	// override sobre PHPUnit_TestCase 
+	// called before the test functions
+    function setUp() {
+		
+    }
+   
+	//==================================================================================
+	function testGetInstance(){
+		$db=Database::getInstance();
+		
+		$this->assertTrue( $db->pdo instanceof PDO );
+	}		
+}
+?>
