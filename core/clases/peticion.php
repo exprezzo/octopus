@@ -1,4 +1,5 @@
 <?php
+
 class Peticion{
 	function Peticion( $url, $peticiond = null ) {										
 		$xp = explode( '/', $url);
@@ -49,33 +50,58 @@ class Peticion{
 		$this->controlador = $controlador;
 		$this->accion 	   = $accion;		
 		
-		if (isset($peticiond) ){
-			$this->url_app = $peticiond->url_app;
-			$this->url_web = $peticiond->url_web;
-			$this->url_mod = $peticiond->url_mod;		
-			$this->basePath = $peticiond->basePath;					
-		}
+		// if (isset($peticiond) ){
+			// $this->url_app = $peticiond->url_app;
+			// $this->url_web = $peticiond->url_web;
+			// $this->url_mod = $peticiond->url_mod;		
+			// $this->basePath = $peticiond->basePath;					
+		// }else{
+			$this->establecerRutas();
+		// }
 		
 	}
 	
 	function establecerRutas(){
-		/* 
-		Obtener la ruta absoluta, ya que puede eser asi:	
-		portal.com/				ruta = /
-		portal.com/sistema		ruta = /sistema
-		localhost/portal		ruta = /portal
-		portal/					ruta = /	
-		*/
+		//url
+		//ruta_archivos
+		//vistas path (Tomando en cuenta el tema)
+			
 		$arrAppPath = explode('/',$_SERVER['SCRIPT_NAME']) ;				
-		$app_path='/';			
+		$url_app='/';			
 		$arrCount=sizeof($arrAppPath);
 		for( $i=1;  $i<$arrCount-2; $i++ ){		//no nos interesa el primero ni los ultimos dos
-			$app_path.=''.$arrAppPath[$i].'/';			
+			$url_app.=''.$arrAppPath[$i].'/';
 		}
 		
-		$this->url_app = $app_path;
-		$this->url_web = $app_path.'web/';
-		$this->url_mod = $app_path.'web/';		
+		global  $_TEMA_APP;
+		$tema = $_TEMA_APP;
+		
+		$ruta_archivos = '../'.$this->modulo;
+		$ruta_vistas = $ruta_archivos.'/temas/'.$tema.'/vistas/';		
+		$url_web = $url_app.$this->modulo.'/temas/'.$tema.'/web/';
+		
+		
+		if ( !file_exists($ruta_archivos) ){
+			$ruta_archivos = 'modulos/'.$this->modulo;
+			$ruta_vistas = 'modulos/'.$this->modulo.'/temas/'.$tema.'/vistas/';
+			
+			if ( !file_exists($ruta_archivos) ){
+				throw new Exception("carpeta de aplicacion no encontrada ".$ruta_archivos);
+			}
+			
+			$url_web = $url_app.'core/modulos/'.$this->modulo.'/temas/'.$tema.'/web/';						
+		}
+		
+		$this->ruta_archivos = $ruta_archivos;
+		$this->ruta_vistas = $ruta_vistas;
+		$this->url_web = $url_web;
+		
+		
+		$this->url_app = $url_app;				
+		$this->basePath=$ruta_archivos.'/';
+		
+		$this->url_web_mod = $url_web;
+		$this->url_mod = $url_app; 
 	}
 }
 ?>

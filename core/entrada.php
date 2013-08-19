@@ -1,6 +1,11 @@
 <?php		
-	//  AQUI INICIA EL PROCESO
 	
+	//  AQUI INICIA EL PROCESO
+	function my_autoloader($class) {		
+		global $_PETICION;	
+	}
+
+	spl_autoload_register(__NAMESPACE__.'\my_autoloader');
 	session_start();	
 	//-------------------------------------------------------------------------------		
 	ini_set('date.timezone', 'America/Mazatlan');	
@@ -28,26 +33,33 @@
 			$_SERVER['PATH_INFO'] = $_SERVER['ORIG_PATH_INFO'];
 		}
 		$_PETICION=new Peticion( $_SERVER['PATH_INFO'] ); //Analiza el url		
-		$_PETICION->establecerRutas();	
+		// $_PETICION->establecerRutas();	
 		
 		//Una vez obtenido el modulo, se revisa que exista la carpeta.		
-		if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
-			$APPS_PATH='../modulos/';
-			$MOD_WEB_PATH=$WEB_BASE.'modulos/'.$_PETICION->modulo.'/';
-			if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
-				throw new Exception("carpeta de aplicacion no encontrada");
-			}			
-		}		
+		
+		
+		// if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
+			// $APPS_PATH='modulos/';
+			// $MOD_WEB_PATH=$_PETICION->url_web.'modulos/'.$_PETICION->modulo.'/';
+			// if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
+				// throw new Exception("carpeta de aplicacion no encontrada");
+			// }			
+		// }	
+
+			// print_r($_PETICION);
 		//y se carga el archivo de configuracion del modulo
-		$configPath=$APPS_PATH.$_PETICION->modulo.'/config.php';
-		if ( file_exists($configPath) ){
-			require_once $APPS_PATH.$_PETICION->modulo.'/config.php';
+		// $configPath=$APPS_PATH.$_PETICION->modulo.'/config.php';
+		if ( file_exists($_PETICION->ruta_archivos) ){
+			if ( file_exists($_PETICION->ruta_archivos.'/config.php') ){
+				require_once $_PETICION->ruta_archivos.'/config.php';
+			}
+			
 		}
 		
 					
-		$rutaControlador=$APPS_PATH.$_PETICION->modulo.'/controladores/'.$_PETICION->controlador.'.php';			
-		$_PETICION->basePath=$APPS_PATH.$_PETICION->modulo.'/';
-					
+		$rutaControlador = $_PETICION->ruta_archivos.'/controladores/'.$_PETICION->controlador.'.php';			
+		// $_PETICION->basePath=$APPS_PATH.$_PETICION->modulo.'/';
+		$APPS_PATH = $_PETICION->basePath;
 		if ( file_exists($rutaControlador) ){
 			require_once ($rutaControlador);
 		}else{

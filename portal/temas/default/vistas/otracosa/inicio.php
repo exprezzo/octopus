@@ -1,1 +1,0 @@
-<h1>Hola soy la pagina de Inicio de otra cosa</h1>

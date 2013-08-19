@@ -8,22 +8,20 @@ class  Vista{
 		echo '<script src="/web/apps/'.$_PETICION->modulo.'/'.$ruta.'" type="text/javascript"></script>';		
 	}
 	
-	
 	function mostrarArchivo($rutaRelativa, $tema=''){
-		global $_PETICION;		
+		global $_PETICION;
 		global $_TEMA_APP;
 		
 		$tema = (empty($tema))? $_TEMA_APP : $tema;
-		$ruta=$_PETICION->basePath.'temas/'.$tema.'/vistas/'.$rutaRelativa;											
+		$ruta=$_PETICION->basePath.'temas/'.$tema.'/vistas/'.$rutaRelativa;
 		
-		$archivo_existe = ( file_exists($ruta) ) ? true : false;		
+		$archivo_existe = ( file_exists($ruta) ) ? true : false;
 		if ($archivo_existe) {
 			//$this->antesdeMostrar($vista);
 			require_once($ruta);
 			//$this->despuesdeMostrar($vista);
 			$success=true;
-			$msg='accion mostrado';
-		}else{			
+			$msg='accion mostrado';		}else{			
 			$success=false;
 			$msg='El archivo no ha sido encontrado: '.$ruta;			
 			echo $msg;
@@ -36,9 +34,9 @@ class  Vista{
 		);
 	}
 	
-	function mostrarTema($peticion, $tema){
-	
-		$rutaVista=$peticion->basePath.'temas/'.$tema.'/layout.php';											
+	function mostrarTema($peticion, $tema, $layout='layout'){
+		global $_PETICION, $APP_CONFIG;
+		$rutaVista=$peticion->basePath.'temas/'.$tema.'/'.$layout.'.php';											
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;	
 		if ($vista_existe) {			
 			require_once($rutaVista);			
@@ -68,7 +66,7 @@ class  Vista{
 		
 		$tema = empty( $tema )? '' : $tema.'/';		
 		
-		 // print_r($peticion);
+		  // print_r($peticion);
 		$rutaVista=$peticion->basePath.'temas/'.$tema.'vistas/'.$peticion->controlador.'/'.$peticion->accion.'.php';									
 		
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;
@@ -100,7 +98,7 @@ class  Vista{
 	}
 	
 	
-	function mostrar($vista='', $buscarEnRaiz=false){
+	function mostrar($vista=''){
 		global $_PETICION;
 		global $APPS_PATH;
 		global $APP_CONFIG;
@@ -126,7 +124,9 @@ class  Vista{
 						modulo/controlador/vista
 								
 			*/
-			$peticionVista = new $_PETICION($vista,$_PETICION);
+			
+			$peticionVista = new $_PETICION($vista);
+			
 		}
 		// echo $vista;
 		// print_r($peticionVista);

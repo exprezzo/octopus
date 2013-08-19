@@ -72,7 +72,7 @@ class Controlador{
 		$vista->datos=$obj;		
 		
 		global $_PETICION;
-		$vista->mostrar('/'.$_PETICION->controlador.'/edicion');
+		$vista->mostrar('/'.$_PETICION->modulo.'/'.$_PETICION->controlador.'/edicion');
 		// print_r($obj);
 	}
 	
