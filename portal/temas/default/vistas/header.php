@@ -1,1 +1,0 @@
-<?php $this->mostrarArchivo('menu.php'); ?>
