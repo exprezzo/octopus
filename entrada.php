@@ -20,12 +20,12 @@
 	if (!isset($CORE_PATH)) $CORE_PATH='';
 	
 	require_once 'clases/peticion.php';
-	require_once 'clases/mvc/vista.php';	
-	require_once 'clases/mvc/controlador.php';
+	require_once 'mvc/vista.php';	
+	require_once 'mvc/controlador.php';
 	require_once 'clases/i_crud.php';
 	
 	require_once 'clases/database.php';
-	require_once 'clases/mvc/modelo.php';		
+	require_once 'mvc/modelo.php';		
 	
 	
 	try{

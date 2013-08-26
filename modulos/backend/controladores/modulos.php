@@ -1,5 +1,5 @@
 <?php
-require_once $APPS_PATH.$_PETICION->modulo.'/modelos/Modulo_modelo.php';
+require_once $_PETICION->basePath.'/modelos/Modulo_modelo.php';
 class modulos extends Controlador{
 	var $modelo="Modulo";
 	var $campos=array('id','nombre','icono','nombre_interno','ruta_base','orden');

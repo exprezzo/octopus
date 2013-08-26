@@ -83,8 +83,11 @@ var TabManager={
 			
 			var tabs=$('#tabs > div');
 			for(var i=0; i<tabs.length; i++){
-				if ( $(tabs[i]).attr('id') == idTab ){										
+				if ( $(tabs[i]).attr('id') == idTab ){				
 					$("#tabs").wijtabs('select', i);
+					var h = $(tabs[i]).height();			
+					$('#tabs').height(h + 60);
+			
 					return true;
 				}
 			}

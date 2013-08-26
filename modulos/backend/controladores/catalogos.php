@@ -3,13 +3,13 @@
  require_once $_PETICION->basePath.'/modelos/catalogo_modelo.php';
 require_once $_PETICION->basePath.'/modelos/modulo_modelo.php';
 
-include $_PETICION->basePath.'/crear_catalogo/crear_controlador.php';
-include $_PETICION->basePath.'/crear_catalogo/crear_modelo.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_controlador.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_modelo.php';
 // include $_PETICION->basePath.'/crear_catalogo/crear_vistas.php';
-include $_PETICION->basePath.'/crear_catalogo/crear_buscador.php';
-include $_PETICION->basePath.'/crear_catalogo/crear_buscadorjs.php';
-include $_PETICION->basePath.'/crear_catalogo/crear_editor.php';
-include $_PETICION->basePath.'/crear_catalogo/crear_editorjs.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_buscador.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_buscadorjs.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_editor.php';
+include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_editorjs.php';
 
 
 class catalogos extends Controlador{
@@ -39,7 +39,7 @@ class catalogos extends Controlador{
 		
 		
 		global $_PETICION;
-		$vista->mostrar('/'.$_PETICION->controlador.'/edicion');		
+		$vista->mostrar('/'.$_PETICION->modulo.'/'.$_PETICION->controlador.'/edicion');		
 	}
 	
 	function crear_catalogo( $params ){
@@ -78,6 +78,7 @@ class catalogos extends Controlador{
 		
 		
 		$params['fields']=$fields;
+		// print_r($params); exit;
 		$resp1=crear_controlador($params);
 		$resp2=crear_modelo($params);
 		$resp3=crear_buscador($params);
@@ -116,7 +117,8 @@ class catalogos extends Controlador{
 			'modulo'=>$moduloObj['nombre_interno'],			
 			'ruta_base'=>$moduloObj['ruta_base'],
 			'pk_tabla'=>$_REQUEST['datos']['pk_tabla'],
-			'catalogo'=>$_REQUEST['datos']['nombre']
+			'catalogo'=>$_REQUEST['datos']['nombre'],
+			'campos'=>$_REQUEST['datos']
 		);
 		
 		// print_r( $res ); exit;
