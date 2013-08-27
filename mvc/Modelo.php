@@ -217,22 +217,22 @@ class Modelo implements ICrud{
 				case 'contains':				
 				case 'beginswith':					
 				case 'endswith':
-					$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' and ';
+					$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' or ';
 				break;
 				case 'greater':				
-					$cadena.=' '.$field.' > :'.$filtro['dataKey'].' and ';
+					$cadena.=' '.$field.' > :'.$filtro['dataKey'].' or ';
 				break;
 				case 'greaterorequal':
-					$cadena.=' '.$field.' >= :'.$filtro['dataKey'].' and ';
+					$cadena.=' '.$field.' >= :'.$filtro['dataKey'].' or ';
 				break;
 				case 'isempty':
-					$cadena.=' '.$field.' = "" and ';
+					$cadena.=' '.$field.' = "" or ';
 				break;
 				case 'lessorequal':
-					$cadena.=' '.$field.' <= :'.$filtro['dataKey'].' and ';
+					$cadena.=' '.$field.' <= :'.$filtro['dataKey'].' or ';
 				break;				
 				case 'less':
-					$cadena.=' '.$field.' < :'.$filtro['dataKey'].' and ';
+					$cadena.=' '.$field.' < :'.$filtro['dataKey'].' or ';
 				break;				
 			}
 		}		
@@ -328,6 +328,7 @@ class Modelo implements ICrud{
 			$sql = 'SELECT * FROM '.$this->tabla.$filtros;
 		}
 		
+		// echo $sql; exit;
 		$sth = $con->prepare($sql);
 		if ($paginar){
 			$sth->bindValue(':limit',$limit,PDO::PARAM_INT);

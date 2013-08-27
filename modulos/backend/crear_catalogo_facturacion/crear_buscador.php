@@ -85,9 +85,9 @@ $contenido='
 }
 
 function crearBuscador2($ruta, $params){
-	$titulo = empty($params['campos']['titulo_busqueda'])? 'BUSQUEDA' : $params['campos']['titulo_nuevo'];
+	$titulo = empty($params['campos']['titulo_busqueda'])? 'BUSQUEDA' : $params['campos']['titulo_busqueda'];
 	$controlador = $params['controlador'];
-	
+	$icon = empty( $params['campos']['icono'] )? '' : $params['campos']['icono'];
 	$contenido='<style>
 </style>
 <?php
@@ -96,7 +96,7 @@ function crearBuscador2($ruta, $params){
 ?>
 <div class="contenedor_catalogo" id="<?php echo $id; ?>">	
 	<div class="titulo" style="text-align:center; background: black; color: white; padding:10px; margin:0; width:100%; position:relative;">
-		<img  style="display:inline-block;" src="http://png.findicons.com/files/icons/2254/munich/32/invoice.png" />  		
+		<img  style="display:inline-block;" src="'.$icon.'" />  		
 		<h1 style="color: white; display: inline-block; vertical-align: top; margin-top: 9px;">'.$titulo.'</h1>			
 		<div class="toolbarEdicion" style="display: inline-block; vertical-align: top; margin-left:10%; ">
 						
@@ -106,7 +106,7 @@ function crearBuscador2($ruta, $params){
 			
 			<div style="position:absolute; right:38px; top:14px;">
 				<form action="<?php echo $_PETICION->url_app; ?>'.$controlador.'/buscar">
-				<input type="text" name="query" >
+				<input type="text" name="query" value="<?php echo empty($_GET[\'query\'])? \'\' : $_GET[\'query\']; ?>" >
 				<input type="submit" value="Buscar" />					
 				</form>
 			</div>

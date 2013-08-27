@@ -24,6 +24,15 @@ function crear_editorjs($params){
 	ob_end_clean();
 	
 	$contenido=str_replace ('EdicionNombreDelControlador','Edicion'.$nombreControlador,$out1);
+	$tituloNuevo = empty( $params['campos']['titulo_nuevo'] )? 'Nuevo' : $params['campos']['titulo_nuevo'] ;
+	$contenido=str_replace ("this.tituloNuevo='Nuevo';","this.tituloNuevo='".$tituloNuevo."';", $contenido);
+	
+	$tituloNuevo = $params['campos']['titulo_edicion'];
+	if ( !empty($tituloNuevo) ){
+		$remplazar = "this.configuracion.catalogo.modelo +':'+id";
+		$contenido=str_replace ($remplazar,$tituloNuevo, $contenido);
+	}
+	
 	
 	$rutaCompleta=$ruta.'edicion.js';	
 	if ( file_exists($rutaCompleta) ){

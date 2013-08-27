@@ -41,7 +41,13 @@ class Controlador{
 		}
 		return $this->vistaObj;
 	}
-	
+
+	function nueva() {
+		global $_PETICION;
+		$_PETICION->accion="nuevo";
+		
+		return $this->nuevo();
+	}
 	
 	function nuevo(){		
 		$campos=$this->campos;

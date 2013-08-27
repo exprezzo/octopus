@@ -110,6 +110,13 @@
 			  me.eliminar();
 			}
 		});
+		
+		$(this.tabId + ' .toolbarEdicion input[type="submit"]').click( function(e){
+			e.preventDefault();
+			var gridBusqueda=$(me.tabId+" .grid_busqueda");				
+			gridBusqueda.wijgrid('ensureControl', true);
+		});
+		
 		$(this.tabId+ " > .lista_toolbar").wijribbon({
 			click: function (e, cmd) {
 				switch(cmd.commandName){
@@ -168,7 +175,16 @@
 				dataType: "json"
 			}),
 			dynamic:true,
-			reader:new wijarrayreader(campos)
+			reader:new wijarrayreader(campos),
+			loading : function(data){				
+				var value = $(me.tabId + ' input[name="query"]').val();				
+				//{CAMPOS_BUSQUEDA}
+				// data.proxy.options.data.filtering.push({
+					// dataKey: "descripcion",
+					// filterOperator: "Contains",
+					// filterValue: value
+				// });
+            }
 		});
 				
 		dataSource.reader.read= function (datasource) {						
@@ -189,7 +205,7 @@
 			pageSize:pageSize,
 			selectionMode:'singleRow',
 			data:dataSource,
-			showFilter:true,
+			showFilter:false,
 			columns: [ 
 			    // { dataKey: "id", hidden:true, visible:true, headerText: "ID" }						
 				//{FIELDS}

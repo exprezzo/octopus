@@ -1,5 +1,6 @@
 ﻿var EdicionNombreDelControlador = function(){
 	this.editado=false;
+	this.tituloNuevo='Nuevo';
 	this.saveAndClose=false;
 	this.borrar=function(){		
 		var r=confirm("¿Eliminar Elemento?");
@@ -102,20 +103,25 @@
 		 });
 	}
 	this.actualizarTitulo=function(){
+		var me=this;
+		function getValorCampo(campo){
+			var valor = $(me.tabId + ' [name="'+campo+'"]').val();
+			return valor;
+		}
+		
 		var tabId = this.tabId;		
 		var id = $(this.tabId + ' [name="'+this.configuracion.pk+'"]').val();
-		if (id>0){
-			// $('a[href="'+tabId+'"]').html(this.configuracion.catalogo.modelo +':'+id);
+		if (id>0){			
 			$(tabId +' .titulo h1').html(this.configuracion.catalogo.modelo +':'+id);
 		}else{
-			$(tabId +' .titulo h1').html('Nuevo');
+			$(tabId +' .titulo h1').html(this.tituloNuevo);
 			// $('a[href="'+tabId+'"]').html('Nuevo');
 		}
 	}
 	this.nuevo=function(){
 		var tabId=this.tabId;
 		var tab = $('#tabs '+tabId);		
-		$(tabId +' .titulo h1').html('Nuevo');
+		$(tabId +' .titulo h1').html(this.tituloNuevo);
 		
 		tab.find('.txtId').val(0);
 		me.editado=false;

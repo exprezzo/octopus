@@ -65,10 +65,16 @@
 		</div><div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
 			<label style="">titulo_edicion:</label>
 			<input type="text" name="titulo_edicion" class="txt_titulo_edicion" value="<?php echo $this->datos['titulo_edicion']; ?>" style="width:500px;" />
-		</div><div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
+		</div>
+		<div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
 			<label style="">titulo_busqueda:</label>
 			<input type="text" name="titulo_busqueda" class="txt_titulo_busqueda" value="<?php echo $this->datos['titulo_busqueda']; ?>" style="width:500px;" />
-		</div><div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
+		</div>
+		<div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
+			<label style="">Campos Busqueda:</label>
+			<input placeholder="Campos separados por coma" type="text" name="campos_busqueda" class="" value="<?php echo $this->datos['campos_busqueda']; ?>" style="width:500px;" />
+		</div>
+		<div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >
 			<label style="">msg_creado:</label>
 			<input type="text" name="msg_creado" class="txt_msg_creado" value="<?php echo $this->datos['msg_creado']; ?>" style="width:500px;" />
 		</div><div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;" autoFocus >

@@ -100,6 +100,7 @@ $contenido='
 function crearEditor2($ruta, $params){
 	$tituloNuevo = empty($params['campos']['titulo_nuevo'])? 'NUEVO' : $params['campos']['titulo_nuevo'];
 	$controlador = $params['controlador'];
+	$icon = empty( $params['campos']['icono'] )? '' : $params['campos']['icono'];
 	$contenido='
 <style>	
 </style>
@@ -108,7 +109,7 @@ function crearEditor2($ruta, $params){
 ?>
 <div class="contenedor_formulario" id="<?php echo $id; ?>">	
 	<div class="titulo" style="text-align:center; background: black; color: white; padding:10px; margin:0; width:100%; position:relative;">
-		<img  style="display:inline-block;" src="http://png.findicons.com/files/icons/2254/munich/32/invoice.png" />  		
+		<img  style="display:inline-block;" src="'.$icon.'" />  		
 			<h1 style="color: white; display: inline-block; vertical-align: top; margin-top: 9px;">'.$tituloNuevo.'</h1>			
 		<div class="toolbarEdicion" style="display: inline-block; vertical-align: top; margin-left:10%; ">
 			<button class="btnNuevo">Nuevo</button>

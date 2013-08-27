@@ -22,6 +22,29 @@ function crear_buscadorjs($params){
 	ob_end_clean();	
 	$contenido=str_replace ('BusquedaNombreDelControlador','Busqueda'.$nombreControlador,$out1);
 	
+	if ( !empty( $params['campos']['campos_busqueda'] ) ){
+		$campos=explode ( ',', $params['campos']['campos_busqueda'] );
+		$cadenaCampos='data.proxy.options.data.filtering.push(';
+		foreach($campos as $campo){
+			$cadenaCampos.='{
+					 dataKey: "'.trim($campo).'",
+					 filterOperator: "Contains",
+					 filterValue: value
+				 },';
+			
+		}
+		$cadenaCampos = substr($cadenaCampos, 0, -1);	 
+			// echo $cadenaCampos; exit;
+		$cadenaCampos.=');';
+		$contenido=str_replace ('//{CAMPOS_BUSQUEDA}',$cadenaCampos,$contenido);
+	}
+	//{CAMPOS_BUSQUEDA}
+				// data.proxy.options.data.filtering.push({
+					// dataKey: "descripcion",
+					// filterOperator: "Contains",
+					// filterValue: value
+				// });
+				
 	//Genera la configuracion de los campos
 	$fieldsStr='';
 	foreach($params['fields'] as $campo){

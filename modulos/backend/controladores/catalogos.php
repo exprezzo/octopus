@@ -14,7 +14,7 @@ include $_PETICION->basePath.'/crear_catalogo_facturacion/crear_editorjs.php';
 
 class catalogos extends Controlador{
 	var $modelo="Catalogo";
-	var $campos=array('id','fk_modulo','nombre','controlador','modelo','tabla','pk_tabla','icono','titulo_nuevo','titulo_edicion','titulo_busqueda','msg_creado','msg_actualizado','pregunta_eliminar','msg_eliminado','msg_cambios');
+	var $campos=array('id','fk_modulo','nombre','controlador','modelo','tabla','pk_tabla','icono','titulo_nuevo','titulo_edicion','titulo_busqueda','msg_creado','msg_actualizado','pregunta_eliminar','msg_eliminado','msg_cambios','campos_busqueda');
 	var $pk="id";
 	var $nombre="catalogos2";
 	
