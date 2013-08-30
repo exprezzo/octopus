@@ -172,7 +172,8 @@
 		var dataSource = new wijdatasource({
 			proxy: new wijhttpproxy({
 				url: kore.url_base+this.configuracion.modulo.nombre+'/'+this.controlador.nombre+'/buscar',
-				dataType: "json"
+				dataType: "json",
+				type:'POST'
 			}),
 			dynamic:true,
 			reader:new wijarrayreader(campos),

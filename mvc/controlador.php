@@ -85,8 +85,8 @@ class Controlador{
 	function buscar(){
 		$mod=$this->getModel();
 		
-		if (!empty($_GET['paging']) ){
-			$paging=$_GET['paging']; //Datos de paginacion enviados por el componente js
+		if (!empty($_REQUEST['paging']) ){
+			$paging=$_REQUEST['paging']; //Datos de paginacion enviados por el componente js
 			if ($paging['pageSize']<0) $paging['pageSize']=0;
 			$params=array(	//Se traducen al lenguaje sql
 				'limit'=>$pageSize=intval($paging['pageSize']),
@@ -99,8 +99,8 @@ class Controlador{
 		
 		
 
-		if ( isset($_GET['filtering']) ){
-			$params['filtros']=$_GET['filtering'];
+		if ( isset($_REQUEST['filtering']) ){
+			$params['filtros']=$_REQUEST['filtering'];
 		}
 		
 		$res=$mod->buscar($params);				

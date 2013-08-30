@@ -29,7 +29,10 @@ class '.$nombreControlador.' extends Controlador{
 	
 	function mostrarVista( $archivos=""){
 		$vista= $this->getVista();
-		$vista->mostrar( $archivos );
+		
+		global $_TEMA_APP;
+		global $_PETICION;
+		return $vista->mostrarTema($_PETICION, $_TEMA_APP);
 	}
 	
 	function nuevo(){		
@@ -42,6 +45,7 @@ class '.$nombreControlador.' extends Controlador{
 		
 		global $_TEMA_APP;
 		global $_PETICION;
+		$_PETICION->accion=\'edicion\';
 		return $vista->mostrarTema($_PETICION, $_TEMA_APP);
 		
 		
@@ -74,16 +78,17 @@ class '.$nombreControlador.' extends Controlador{
 		
 		global $_PETICION;
 		global $_TEMA_APP;
-		
+		$_PETICION->accion="edicion";
 		$vista->mostrarTema($_PETICION,$_TEMA_APP);
 	}
 	function buscar(){
-		if ( !isset($_GET[\'paging\'])  ){
+		if ( $_SERVER[\'REQUEST_METHOD\']==\'POST\'  ){
+			return parent::buscar();			
+		}else{
 			global $_PETICION, $_TEMA_APP;
 			$vista = $this->getVista();
+			$_PETICION->accion=\'busqueda\';
 			return $vista->mostrarTema($_PETICION, $_TEMA_APP);
-		}else{
-			return parent::buscar();
 		}
 	}
 }
