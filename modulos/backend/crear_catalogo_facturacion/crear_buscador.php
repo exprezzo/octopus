@@ -47,25 +47,11 @@ $contenido='
 </script>
 
 <div class="contenedor_catalogo" id="<?php echo $id; ?>">	
-	<div class="titulo" style="text-align:center; background: black; color: white; padding:10px; margin:0; width:100%; position:relative;">
-		<img  style="display:inline-block;" src="'.$icon.'" />  		
-		<h1 style="color: white; display: inline-block; vertical-align: top; margin-top: 9px;">'.$titulo.'</h1>			
-		<div class="toolbarEdicion" style="display: inline-block; vertical-align: top; margin-left:10%; ">
-						
-			<button class="btnNuevo">Nuevo</button>
-			<button class="btnEditar">Editar</button>
-			<button class="btnEliminar" >Eliminar</button>		
-			
-			<div style="position:absolute; right:38px; top:14px;">
-				<form action="<?php echo $_PETICION->url_app; ?>facturas/buscar">
-				<input type="text" name="query" value="<?php echo empty($_GET[\'query\'])? \'\' : $_GET[\'query\']; ?>" >
-				<input type="submit" value="Buscar" />					
-				</form>
-			</div>
-		</div>		
-	</div>	
-	<div style="text-align:center; "  >		
-		<div >	
+	<div id="titulo">
+    	<h1>'.$titulo.'</h1>
+	</div>		
+	<div id="cuerpo" >				
+		<div id="contenedorDatos2">
 		<table class="grid_busqueda">
 			<thead>
 				<th>id</th>		
@@ -74,6 +60,11 @@ $contenido='
 			<tbody>			
 			</tbody>
 		</table>
+		<div id="contenedorMenu2" class="toolbarEdicion">
+				<input type="submit" value="Nuevo" class="botonNuevo btnNuevo">
+				<input type="submit" value="Editar" class="botonNuevo btnEditar">
+				<input type="submit" value="Eliminar" class="botonNuevo sinMargeDerecho btnEliminar">
+			</div>
 	</div>
 	</div>
 	

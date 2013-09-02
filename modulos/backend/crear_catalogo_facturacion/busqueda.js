@@ -23,12 +23,12 @@
 			var msg= (resp.msg)? resp.msg : '';
 			var title;
 			if ( resp.success == true	){
-				icon='/web/'+kore.modulo+'/images/yes.png';
+				icon=kore.url_web+'imagenes/yes.png';
 				title= 'Success';				
 				var gridBusqueda=$(me.tabId+" .grid_busqueda");				
 				gridBusqueda.wijgrid('ensureControl', true);
 			}else{
-				icon= '/web/'+kore.modulo+'/images/error.png';
+				icon= kore.url_web+'imagenes/error.png';
 				title= 'Error';
 			}
 			
@@ -147,7 +147,7 @@
 							position: 'bottom-left',
 							title:cmd.commandName,
 							text: "Acciones del toolbar en construcci&oacute;n",
-							image: '/web/'+kore.modulo+'/images/info.png',
+							image: kore.url_web+'imagenes/info.png',
 							class_name: 'my-sticky-class'
 						});
 						
@@ -178,7 +178,7 @@
 			dynamic:true,
 			reader:new wijarrayreader(campos),
 			loading : function(data){				
-				var value = $(me.tabId + ' input[name="query"]').val();				
+				var value = $( ' input[name="query"]').val();				
 				//{CAMPOS_BUSQUEDA}
 				// data.proxy.options.data.filtering.push({
 					// dataKey: "descripcion",

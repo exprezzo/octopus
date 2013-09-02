@@ -23,6 +23,6 @@ $APP_CONFIG['tema'] = 'rocket';
 
 
 // if ( !isset($_LOGIN_REDIRECT_PATH) ) $_LOGIN_REDIRECT_PATH = 'sistema';
-
+$_DEFAUL_LAYOUT ='layout';
 if (!isset($_DEFAULT_CONTROLLER) ) $_DEFAULT_CONTROLLER='backend';
 ?>

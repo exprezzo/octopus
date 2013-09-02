@@ -284,8 +284,8 @@ function getUrlTema($tema){
 	$_TEMAS['artic']="http://cdn.wijmo.com/themes/arctic/jquery-wijmo.css";
 	$_TEMAS['midnight']="http://cdn.wijmo.com/themes/midnight/jquery-wijmo.css";
 	$_TEMAS['aristo']="http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css";
-	// $_TEMAS['rocket']="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css";
-	$_TEMAS['rocket']=$_PETICION->url_web_mod. "libs/temas_wijmo/rocket/jquery-wijmo.css";
+	$_TEMAS['rocket']="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css";
+	// $_TEMAS['rocket']=$_PETICION->url_web_mod. "libs/temas_wijmo/rocket/jquery-wijmo.css";
 	$_TEMAS['cobalt']="http://cdn.wijmo.com/themes/cobalt/jquery-wijmo.css";
 	$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
 	$_TEMAS['black-tie']="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/black-tie/jquery-ui.css";

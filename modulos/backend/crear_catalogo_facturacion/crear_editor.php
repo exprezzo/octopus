@@ -5,6 +5,8 @@ function crear_editor($params){
 	$nombreControlador=$params['controlador'];
 	$campos=$params['fields'];
 	$icon = $params['campos']['icono'];
+	$titulo = $params['campos']['titulo_nuevo'];
+	
 	global $_PETICION;
 	// $ruta='../'.$_PETICION->modulo.'/vistas/'.$nombreControlador.'/';	
 	// $ruta='../'.$params['ruta_base'].$params['modulo'].'temas/default/vistas/'.$nombreControlador.'/';	
@@ -17,11 +19,11 @@ function crear_editor($params){
 	for($i=0; $i<sizeof($campos); $i++ ){
 		// if ($campos[$i]=='id') continue;
 		
-$divs.=
-'<div class="inputBox" style="margin-bottom:8px;display:block;margin-left:10px;width:100%;"  >
-	<label style="">'.ucwords(strtolower($campos[$i])) .':</label>
-	<input type="text" name="'.$campos[$i].'" class="txt_'.$campos[$i].'" value="<?php echo $this->datos[\''.$campos[$i].'\']; ?>" style="width:500px;" />
-</div>'.PHP_EOL;
+$divs.='
+				<div class="inputBox" style=""  >
+					<label style="">'.ucwords(strtolower($campos[$i])) .':</label>
+					<input type="text" name="'.$campos[$i].'" class="entradaDatos" value="<?php echo $this->datos[\''.$campos[$i].'\']; ?>" style="width:500px;" />
+				</div>'.PHP_EOL;
 	}
 $contenido='
 <?php
@@ -53,36 +55,23 @@ $contenido='
 		 editor.init(config);		
 	});
 </script>
-	
-<div class="contenedor_formulario" id="<?php echo $id; ?>">	
-	<div class="titulo" style="text-align:center; background: black; color: white; padding:10px; margin:0; width:100%; position:relative;">
-		<img  style="display:inline-block;" src="'.$icon.'" />  		
-			<h1 style="color: white; display: inline-block; vertical-align: top; margin-top: 9px;">Nuevo Pais</h1>			
-		<div class="toolbarEdicion" style="display: inline-block; vertical-align: top; margin-left:10%; ">
-			<button class="btnNuevo">Nuevo</button>
-			<button class="btnGuardar">Guardar</button>
-			<button class="btnDelete">Eliminar</button>	
-			
-		</div>
-		<div style="position:absolute; right:38px; top:14px;">
-			<form action="<?php echo $_PETICION->url_app; ?>paises/buscar">
-			<input type="text" name="query" />
-			<input type="submit" value="Buscar" />					
-			</form>
-		</div>
-		
+<div class="contenedor_formulario" id="<?php echo $id; ?>">
+	<div id="titulo">
+    	<h1>'.$titulo.'</h1>
 	</div>
-	<div style="text-align:center; padding:20px;"  >				
-		<div class="pnlIzq">				
-			<form class="frmEdicion" style="padding-top:10px;">				
+	<div id="cuerpo" >				
+		<div id="contenedorDatos2">
+			<form class="frmEdicion" style="">
 				'.$divs.'
 			</form>
-		</div>
-		
+			<div id="contenedorMenu2" class="toolbarEdicion">
+				<input type="submit" value="Nuevo" class="botonNuevo btnNuevo">
+				<input type="submit" value="Guardar" class="botonNuevo btnGuardar">
+				<input type="submit" value="Eliminar" class="botonNuevo sinMargeDerecho btnDelete">
+			</div>
+		</div>		
 	</div>
-</div>
-
-';
+</div>';
 	
 	
 	$rutaCompleta=$ruta.'edicion.php';	

@@ -2,7 +2,7 @@
 class  Vista{		
 	var $errores=array();
 	var $valores=array();
-		
+	
 	function cargarJs($ruta){
 		global $_PETICION;
 		echo '<script src="/web/apps/'.$_PETICION->modulo.'/'.$ruta.'" type="text/javascript"></script>';		
@@ -34,7 +34,11 @@ class  Vista{
 		);
 	}
 	
-	function mostrarTema($peticion, $tema, $layout='layout'){
+	function mostrarTema($peticion, $tema, $layout=''){
+		if ( empty($layout) ){
+			global $_DEFAUL_LAYOUT;
+			$layout = $_DEFAUL_LAYOUT;
+		}
 		global $_PETICION, $APP_CONFIG;
 		$rutaVista=$peticion->basePath.'temas/'.$tema.'/'.$layout.'.php';											
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;	

@@ -13,6 +13,8 @@
 	require_once '../config.php';			
 	//las variables por default.
 	if (!isset($_TEMA_APP) ) $_TEMA_APP='default';
+	if (!isset($_DEFAUL_LAYOUT) ) $_DEFAUL_LAYOUT='layout';
+	
 	if (!isset($_DEFAULT_APP) ) $_DEFAULT_APP='portal';	
 	if (!isset($_DEFAULT_CONTROLLER) ) $_DEFAULT_CONTROLLER='paginas';
 	if (!isset($_DEFAULT_ACTION) ) $_DEFAULT_ACTION='inicio';		

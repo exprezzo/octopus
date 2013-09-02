@@ -112,7 +112,11 @@ class Controlador{
 			'rows'=>$res['datos'],
 			'totalRows'=> $res['total']
 		);
+		
 		echo json_encode($respuesta);
+		
+		
+		return $respuesta;
 	}
 	
 	function getModelo(){
