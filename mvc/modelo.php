@@ -1,10 +1,18 @@
 <?php
-
-
 class Modelo implements ICrud{								
 	var $pk='id';
 	var $nombre='';
-
+	var $campos = array();
+	
+	
+		
+	function nuevo($params){
+		$campos=$this->campos;				
+		for($i=0; $i<sizeof($campos); $i++){
+			$obj[$campos[$i]]='';
+		}
+		return $obj;		
+	}
 	function getError($sth = null){	
 		$resp=array();
 		
@@ -14,7 +22,6 @@ class Modelo implements ICrud{
 		}else{
 			$error=$sth->errorInfo();
 		}
-		
 		
 		$resp['success']=false;			
 		$resp['msg']=$error[2];
@@ -212,6 +219,7 @@ class Modelo implements ICrud{
 		$cadena=' WHERE ';
 		foreach($filtros as $filtro){
 			$field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
+			// $field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
 			switch( strtolower( $filtro['filterOperator'] ) ){
 				case 'equals':				
 				case 'contains':				
@@ -243,12 +251,12 @@ class Modelo implements ICrud{
 	function bindFiltros($sth,$filtros){
 		foreach($filtros as $filtro){
 			$dk=$filtro['dataKey'];			
-			$dk=':'.$dk;			
+			$dk=':'.$dk;	
 			switch( strtolower( $filtro['filterOperator'] ) ){
 				case 'equals':										
 					$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_STR);
 				break;
-				case 'contains':			
+				case 'contains':						
 					$sth->bindValue($dk, '%'.$filtro['filterValue'].'%', PDO::PARAM_STR);																				
 				break;
 				case 'beginswith':					
