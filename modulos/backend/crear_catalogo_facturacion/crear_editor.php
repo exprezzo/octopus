@@ -55,6 +55,32 @@ $contenido='
 		 editor.init(config);		
 	});
 </script>
+<style>
+.entradaDatos, input[role="textbox"]{
+	/* float:right; */
+	background-color:#f2f2f2  !important;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px;
+	border-bottom-color:#508b96  !important;
+	border-bottom-style:solid !important;
+	border-bottom-width:1px  !important;
+	-webkit-box-shadow: 0px 3px #d6e6e9  !important;
+    -moz-box-shadow: 0px 3px #d6e6e9  !important;
+	box-shadow: 0px 3px #d6e6e9  !important;
+	/* width:365px; */
+	height:23px;
+	/*height:43px;*/
+	/* margin-bottom:25px; */
+	font-family:"OpenSans-Light", sans-serif;
+	font-size:17px;
+	
+	color:black  !important;
+}
+</style>
 <div class="contenedor_formulario" id="<?php echo $id; ?>">
 	<div id="titulo">
     	<h1>'.$titulo.'</h1>
