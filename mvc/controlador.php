@@ -4,11 +4,25 @@ class Controlador{
 	var $modelo='Modelo';
 	var $campos=array('id');
 	var $pk='id';
-	
+	var $revisarSession=true;
+	var $accionesPublicas=array();
 	
 	function servir(){		
 		global $_PETICION;
 		$accion = $_PETICION->accion;
+		
+		if ($this->revisarSession){
+		// PRINT_R($accionesPublicas); EXIT;
+			if ( !in_array($accion, $this->accionesPublicas ) ){
+				// print_r($_SESSION); exit;
+				if ( !isset($_SESSION['isLoged']) || $_SESSION['isLoged']==false ){
+					$_SESSION['_PETICION'] = $_SERVER['PATH_INFO'];
+					header('Location: '.$_PETICION->url_app.'usuarios/login');
+					return true;
+				}
+			}
+		}
+		
 		if (method_exists($this, $accion )){
 			$respuesta = $this->$accion();
 			if ($respuesta==null){
