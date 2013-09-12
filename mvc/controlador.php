@@ -16,7 +16,12 @@ class Controlador{
 			if ( !in_array($accion, $this->accionesPublicas ) ){
 				// print_r($_SESSION); exit;
 				if ( !isset($_SESSION['isLoged']) || $_SESSION['isLoged']==false ){
-					$_SESSION['_PETICION'] = $_SERVER['PATH_INFO'];
+					$_SESSION['_PETICION'] = '/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];
+					// echo '<pre>';
+					// print_r($_PETICION);
+					// print_r($_SERVER);
+					// echo '</pre>'; exit;
+					
 					header('Location: '.$_PETICION->url_app.'usuarios/login');
 					return true;
 				}
