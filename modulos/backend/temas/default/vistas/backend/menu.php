@@ -68,7 +68,7 @@
 	
 	// print_r($_SESSION);
 	foreach($this->modulos as $mod){
-		 if ($mod['id']==1 && $_SESSION['userInfo']['rol']!=1) continue;
+		 // if ($mod['id']==1 && $_SESSION['userInfo']['rol']!=1) continue;
 		echo '<li><a href="#menuTabs-tabs-'.$tabId.'">'.$mod['nombre'].'</a></li>';		
 		$tabId++;
 	}
@@ -77,7 +77,7 @@
 <?php
 	$tabId=0;
 	foreach($this->modulos as $mod){
-		if ($mod['id']==1 && $_SESSION['userInfo']['rol']!=1) continue;
+		// if ($mod['id']==1 && $_SESSION['userInfo']['rol']!=1) continue;
 		
 		echo '<div id="menuTabs-tabs-'.$tabId.'"> <ul>';
 		foreach($mod['catalogos'] as $cat){			

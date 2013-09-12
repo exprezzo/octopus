@@ -2,7 +2,7 @@
 require_once $_PETICION->basePath.'/modelos/user_model.php';
 class User extends Controlador{
 	var $validarCaptcha=true;
-	
+	var $accionesPublicas=array('login');
 	function mostrarVista($vistaFile=''){		
 		$vista= $this->getVista(); //El manejador de vistas		
 		global $_TEMA_APP;
