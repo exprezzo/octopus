@@ -164,13 +164,15 @@ class Modelo implements ICrud{
 		}
 		$success = $sth->execute();
 		
-		
+		$errCode = 0;
 		if ($success != true){
 			$error=$sth->errorInfo();			
+			
+			
 			$success=false; //plionasmo apropósito
 			$msg=$error[2];						
 			$datos=array();
-			
+			$errCode=$error[1];
 			// echo $msg.$sql; exit;
 		}else{
 			// $success = rowCount();			
@@ -182,10 +184,13 @@ class Modelo implements ICrud{
 			);
 		}
 		
+		
+		
 		return array(
 			'success'	=>$success,			
 			'datos' 	=>$datos,
-			'msg'		=>$msg
+			'msg'		=>$msg,
+			'errCode'	=>$errCode
 		);	
 				
 	}
@@ -195,7 +200,7 @@ class Modelo implements ICrud{
 	}
 	function borrar( $params ){
 		if ( empty($params[$this->pk]) ){
-			throw new Exception("Es necesario el parámetro '".$this->pk."'");
+			throw new Exception("Es necesario el parámetro '".$this->pk."'");			
 		};		
 		$id=$params[$this->pk];
 		$sql = 'DELETE FROM '.$this->tabla.' WHERE '.$this->pk.'=:id';		
