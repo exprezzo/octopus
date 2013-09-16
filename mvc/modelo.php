@@ -1,4 +1,7 @@
 <?php
+/**
+  * @package Core
+  */
 class Modelo implements ICrud{								
 	var $pk='id';
 	var $nombre='';

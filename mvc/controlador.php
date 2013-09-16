@@ -1,27 +1,29 @@
 <?php
-
+/**
+  * @package Core
+  */
 class Controlador{
 	var $modelo='Modelo';
-	var $campos=array('id');
-	var $pk='id';
+	
+	/**
+	 * @var boolean $revisarSession
+	 Esta variable es usada para aplicar seguridad por default, o false para no revisar seguridad en ninguna funcion ni vista
+	*/
 	var $revisarSession=true;
 	var $accionesPublicas=array();
 	
+	/**
+	Esta funcion es llamada antes que otra cosa, aqui se decide si ejecutar la funcion, o mostrar una vista (si la funcion no existe)
+	es un buen punto para aplicar seguridad
+	*/
 	function servir(){		
 		global $_PETICION;
 		$accion = $_PETICION->accion;
 		
-		if ($this->revisarSession){
-		// PRINT_R($accionesPublicas); EXIT;
-			if ( !in_array($accion, $this->accionesPublicas ) ){
-				// print_r($_SESSION); exit;
+		if ($this->revisarSession){		
+			if ( !in_array($accion, $this->accionesPublicas ) ){				
 				if ( !isset($_SESSION['isLoged']) || $_SESSION['isLoged']==false ){
-					$_SESSION['_PETICION'] = '/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];
-					// echo '<pre>';
-					// print_r($_PETICION);
-					// print_r($_SERVER);
-					// echo '</pre>'; exit;
-					
+					$_SESSION['_PETICION'] = '/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];					
 					header('Location: '.$_PETICION->url_app.'usuarios/login');
 					return true;
 				}
@@ -41,13 +43,14 @@ class Controlador{
 			$respuesta = $this->mostrarVista();				
 		}
 		return $respuesta;
-	}	
-	function init(){
-		return array('success'=>true);
-	}
+	}		
 		
-	function mostrarVista($vistaFile=''){		
-		$vista= $this->getVista(); //El manejador de vistas		
+	/**
+	Esta funcion involucra a la clase Vista,
+	
+	*/
+	function mostrarVista(){		
+		$vista= $this->getVista();   //Obtiene una instancia de la clase Vista, para ejecutarle la funcion mostrarTema		
 		global $_TEMA_APP;
 		global $_PETICION;
 		return $vista->mostrarTema( $_PETICION, $_TEMA_APP );
@@ -55,7 +58,7 @@ class Controlador{
 	
 	function getVista(){
 		if ( !isset($this->vistaObj) ){
-			global $CORE_PATH;
+			// global $CORE_PATH;
 			$this->vistaObj = new Vista();
 		}
 		return $this->vistaObj;
@@ -88,7 +91,7 @@ class Controlador{
 		$id=empty( $_REQUEST['id'])? 0 : $_REQUEST['id'];
 		$model=$this->getModel();
 		$params=array(
-			$this->pk=>$id
+			$model->pk=>$id
 		);		
 		
 		$obj=$model->obtener( $params );	
@@ -102,7 +105,7 @@ class Controlador{
 	}
 	
 	function buscar(){
-		$mod=$this->getModel();
+		$mod=$this->getModelo();
 		
 		if (!empty($_REQUEST['paging']) ){
 			$paging=$_REQUEST['paging']; //Datos de paginacion enviados por el componente js
@@ -145,10 +148,7 @@ class Controlador{
 		}	
 		return $this->modObj;
 	}
-	function getModel(){		
 		
-		return $this->getModelo();
-	}		
 	
 
 	function guardar(){
@@ -163,7 +163,7 @@ class Controlador{
 		}
 		$datos= $_POST['datos'];
 		
-		$model=$this->getModel();				
+		$model=$this->getModelo();				
 		$res = $model->guardar($datos);
 		
 		if (!$res['success']) {			
@@ -179,9 +179,7 @@ class Controlador{
 		echo json_encode($res);
 		return $res;
 	}
-	function paginar(){
-		return $this->buscar();
-	}
+	
 	function eliminar(){
 		$modObj= $this->getModel();
 		$params=array();

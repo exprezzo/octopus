@@ -22,10 +22,7 @@ function crear_controlador($params){
 $contenido='<?php
 require_once $_PETICION->basePath.\'/modelos/'.$nombreModelo.'_modelo.php\';
 class '.$nombreControlador.' extends Controlador{
-	var $modelo="'.$nombreModelo.'";
-	var $campos='.$fieldsStr.';
-	var $pk="'.$params['pk_tabla'].'";
-	var $nombre="'.strtolower($nombreControlador).'";
+	var $modelo="'.$nombreModelo.'";	
 	
 	function mostrarVista( $archivos=""){
 		$vista= $this->getVista();
@@ -66,7 +63,7 @@ class '.$nombreControlador.' extends Controlador{
 		
 		// return parent::editar();
 		$id=empty( $_REQUEST[\'id\'])? 0 : $_REQUEST[\'id\'];
-		$model=$this->getModel();
+		$model=$this->getModelo();
 		$params=array(
 			$this->pk=>$id
 		);		

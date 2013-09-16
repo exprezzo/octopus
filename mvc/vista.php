@@ -1,4 +1,7 @@
 <?php
+/**
+  * @package Core
+  */
 class  Vista{		
 	var $errores=array();
 	var $valores=array();
