@@ -66,7 +66,7 @@ class catalogos extends Controlador{
 		}		
 					
 		$sql="SHOW COLUMNS FROM $tabla";
-		$mod=$this->getModel();
+		$mod=$this->getModelo();
 		$res=$mod->ejecutarSql($sql);
 		// print_r($res);
 		$fields=array();

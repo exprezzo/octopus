@@ -72,7 +72,8 @@ class Controlador{
 	}
 	
 	function nuevo(){		
-		$campos=$this->campos;
+		$modelo = $this->getModelo();
+		$campos=$$modelo->campos;
 		$vista=$this->getVista();				
 		for($i=0; $i<sizeof($campos); $i++){
 			$obj[$campos[$i]]='';
@@ -89,7 +90,7 @@ class Controlador{
 		// header("Content-Type: text/html;charset=utf-8");
 		
 		$id=empty( $_REQUEST['id'])? 0 : $_REQUEST['id'];
-		$model=$this->getModel();
+		$model=$this->getModelo();
 		$params=array(
 			$model->pk=>$id
 		);		
