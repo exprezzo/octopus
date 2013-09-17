@@ -5,13 +5,13 @@
   */
 interface ICrud{
 
+	function nuevo($params);
+	
 	function obtener($params); //getById
 	
 	function guardar( $params ); //crear y actualizar		
 		
 	function borrar($params);
 	
-	function paginar($params);
-
 }
 ?>
