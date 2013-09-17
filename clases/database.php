@@ -1,7 +1,13 @@
 <?php
+ /**
+  * Gestiona la conexion a la base de datos con pdo, pdo se obtiene asi: Database::getInstance()->pdo
+  */
 class Database{
 	private static $instancia;
 	
+	/**
+	 * La funcion es privada para impedir crear mas de una instancia, en lugar de esta, use Database::getInstance()
+	 */
     private function __construct(){
 		global $DB_CONFIG;
 		try {
@@ -22,6 +28,9 @@ class Database{
 		}
     }
    
+	/**
+	 * Devuelve un objeto que representa la conexion a la base de datos, este objeto tiene la propiedad pdo
+	 */
 	public static function getInstance(){
       if (  !self::$instancia instanceof self){
          self::$instancia = new self;
