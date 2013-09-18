@@ -16,7 +16,7 @@ class  Vista{
 		global $_TEMA_APP;
 		
 		$tema = (empty($tema))? $_TEMA_APP : $tema;
-		$ruta=$_PETICION->basePath.'temas/'.$tema.'/vistas/'.$rutaRelativa;
+		$ruta=$_PETICION->ruta_vistas.$rutaRelativa;
 		
 		$archivo_existe = ( file_exists($ruta) ) ? true : false;
 		if ($archivo_existe) {
@@ -43,7 +43,7 @@ class  Vista{
 			$layout = $_DEFAUL_LAYOUT;
 		}
 		global $_PETICION, $APP_CONFIG;
-		$rutaVista=$peticion->basePath.'temas/'.$tema.'/'.$layout.'.php';											
+		$rutaVista=$peticion->ruta_presentacion.$layout.'.php';											
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;	
 		if ($vista_existe) {			
 			require_once($rutaVista);			
@@ -74,7 +74,7 @@ class  Vista{
 		$tema = empty( $tema )? '' : $tema.'/';		
 		
 		  // print_r($peticion);
-		$rutaVista=$peticion->basePath.'temas/'.$tema.'vistas/'.$peticion->controlador.'/'.$peticion->accion.'.php';									
+		$rutaVista=$peticion->ruta_vistas.$peticion->controlador.'/'.$peticion->accion.'.php';									
 		
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;
 		

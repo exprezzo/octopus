@@ -1,5 +1,7 @@
 <?php		
-	
+/**
+  * @package Core
+  */	
 	//  AQUI INICIA EL PROCESO
 	function my_autoloader($class) {		
 		global $_PETICION;	

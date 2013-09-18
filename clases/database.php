@@ -1,4 +1,8 @@
 <?php
+/**
+  * @package Core
+  */
+  
  /**
   * Gestiona la conexion a la base de datos con pdo, pdo se obtiene asi: Database::getInstance()->pdo
   */

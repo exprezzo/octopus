@@ -1,4 +1,7 @@
 <?php
+/**
+  * @package Core
+  */
 
 class Peticion{
 	function Peticion( $url, $peticiond = null ) {										
@@ -77,25 +80,25 @@ class Peticion{
 		$tema = $_TEMA_APP;
 		
 		$ruta_archivos = '../'.$this->modulo;
-		$ruta_vistas = $ruta_archivos.'/temas/'.$tema.'/vistas/';		
-		$url_web = $url_app.$this->modulo.'/temas/'.$tema.'/web/';
+		$ruta_vistas = $ruta_archivos.'/presentacion/html.php/';		
+		$ruta_presentacion = $ruta_archivos.'/presentacion/';
+		$url_web = $url_app.$this->modulo.'/presentacion/web/';
 		
 		
 		if ( !file_exists($ruta_archivos) ){
 			$ruta_archivos = 'modulos/'.$this->modulo;
-			$ruta_vistas = 'modulos/'.$this->modulo.'/temas/'.$tema.'/vistas/';
-			
+			$ruta_vistas = 'modulos/'.$this->modulo.'/presentacion/html.php/';
+			$ruta_presentacion = 'modulos/'.$this->modulo.'/presentacion/';
 			if ( !file_exists($ruta_archivos) ){
 				throw new Exception("carpeta de aplicacion no encontrada ".$ruta_archivos);
-			}
-			
-			$url_web = $url_app.'core/modulos/'.$this->modulo.'/temas/'.$tema.'/web/';						
+			}			
+			$url_web = $url_app.'core/modulos/'.$this->modulo.'/presentacion/web/';
 		}
 		
 		$this->ruta_archivos = $ruta_archivos;
 		$this->ruta_vistas = $ruta_vistas;
 		$this->url_web = $url_web;
-		
+		$this->ruta_presentacion = $ruta_presentacion;
 		
 		$this->url_app = $url_app;				
 		$this->basePath=$ruta_archivos.'/';

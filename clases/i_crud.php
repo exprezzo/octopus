@@ -1,4 +1,8 @@
 <?php
+/**
+  * @package Core
+  */
+  
  /**
   * En computacion CRUD es el acronimo de Crear, Obtener, Actualizar y Borrar (del original en ingles: Create, Read, Update and Delete)
   * Esta interfaz solo presenta los metodos vacios, la clase que implemente esta interfaz sera encargada del funcionamiento que corresponda
