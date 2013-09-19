@@ -8,7 +8,7 @@ function crear_buscador($params){
 	$icon = $params['campos']['icono'];
 	 // print_r($params); exit;
 	global $_PETICION;
-	$ruta='../'.$params['ruta_base'].$params['modulo'].'/temas/default/vistas/'.$nombreControlador.'/';	
+	$ruta='../'.$params['ruta_base'].$params['modulo'].'/presentacion/html.php/'.$nombreControlador.'/';	
 	
 	if ( !file_exists($ruta) ){
 		mkdir($ruta, 0700, true);

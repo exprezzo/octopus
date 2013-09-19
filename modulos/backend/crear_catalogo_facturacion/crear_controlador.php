@@ -33,7 +33,20 @@ class '.$nombreControlador.' extends Controlador{
 	}
 	
 	function nuevo(){		
-		return parent::nuevo();				
+		$modelo = $this->getModelo();
+		$campos=$modelo->campos;
+		$vista=$this->getVista();				
+		for($i=0; $i<sizeof($campos); $i++){
+			$obj[$campos[$i]]='';
+		}
+		$vista->datos=$obj;		
+		
+		global $_TEMA_APP;
+		global $_PETICION;
+		$_PETICION->accion="edicion";
+		return $vista->mostrarTema($_PETICION, $_TEMA_APP);
+		
+	
 	}
 	
 	function guardar(){

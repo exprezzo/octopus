@@ -8,7 +8,7 @@ function crear_buscadorjs($params){
 	global $_PETICION;
 	// $ruta='..//web/'.$_PETICION->modulo.'/js/catalogos/'.$nombreControlador.'/';	
 	
-	$ruta='../'.$params['ruta_base'].$params['modulo'].'/temas/default/web/js/catalogos/'.$nombreControlador.'/';	
+	$ruta='../'.$params['ruta_base'].$params['modulo'].'/presentacion/web/js/catalogos/'.$nombreControlador.'/';	
 	
 	// $ruta='../web'.$params['ruta_base'].$params['modulo'].'/js/catalogos/'.$nombreControlador.'/';	
 	if ( !file_exists($ruta) ){
