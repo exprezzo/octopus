@@ -37,7 +37,7 @@ class '.$nombreControlador.' extends Controlador{
 		$campos=$modelo->campos;
 		$vista=$this->getVista();				
 		for($i=0; $i<sizeof($campos); $i++){
-			$obj[$campos[$i]]='';
+			$obj[$campos[$i]]="";
 		}
 		$vista->datos=$obj;		
 		
