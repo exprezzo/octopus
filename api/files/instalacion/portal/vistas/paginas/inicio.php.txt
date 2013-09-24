@@ -1,0 +1,1 @@
+<h1>Hola intern&Eacute;, soy la p&aacute;gina de inicio</h1>
