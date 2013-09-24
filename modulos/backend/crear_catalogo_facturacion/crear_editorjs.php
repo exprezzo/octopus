@@ -11,7 +11,7 @@ function crear_editorjs($params){
 	
 	
 	 // $ruta='../web'.$rutaBase.$params['modulo'].'/js/catalogos/'.$nombreControlador.'/';	
-	$ruta='../'.$params['ruta_base'].$params['modulo'].'/temas/default/web/js/catalogos/'.$nombreControlador.'/';	
+	$ruta='../'.$params['ruta_base'].$params['modulo'].'/presentacion/web/js/catalogos/'.$nombreControlador.'/';	
 	
 	if ( !file_exists($ruta)) {						
 		mkdir($ruta,0777,true);

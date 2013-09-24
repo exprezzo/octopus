@@ -10,7 +10,7 @@ function crear_editor($params){
 	global $_PETICION;
 	// $ruta='../'.$_PETICION->modulo.'/vistas/'.$nombreControlador.'/';	
 	// $ruta='../'.$params['ruta_base'].$params['modulo'].'temas/default/vistas/'.$nombreControlador.'/';	
-	$ruta='../'.$params['ruta_base'].$params['modulo'].'/temas/default/vistas/'.$nombreControlador.'/';	
+	$ruta='../'.$params['ruta_base'].$params['modulo'].'/presentacion/html.php/'.$nombreControlador.'/';	
 	if ( !file_exists($ruta) ){
 		mkdir($ruta, 0700, true);
 	}

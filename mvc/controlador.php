@@ -73,7 +73,7 @@ class Controlador{
 	
 	function nuevo(){		
 		$modelo = $this->getModelo();
-		$campos=$$modelo->campos;
+		$campos=$modelo->campos;
 		$vista=$this->getVista();				
 		for($i=0; $i<sizeof($campos); $i++){
 			$obj[$campos[$i]]='';
@@ -160,7 +160,7 @@ class Controlador{
 				'success'=>false,
 				'msg'=>'No se recibieron datos para almacenar'
 			);
-			echo json_encode($res); exit;
+			echo json_encode($res); return $res;
 		}
 		$datos= $_POST['datos'];
 		
@@ -168,7 +168,7 @@ class Controlador{
 		$res = $model->guardar($datos);
 		
 		if (!$res['success']) {			
-			echo json_encode($res); exit;
+			echo json_encode($res); return $res;
 		}
 		
 		
@@ -182,24 +182,33 @@ class Controlador{
 	}
 	
 	function eliminar(){
-		$modObj= $this->getModel();
+		$modObj= $this->getModelo();
 		$params=array();
 		
-		if ( !isset($_POST[$this->pk]) ){
+		if ( !isset($_POST[$modObj->pk]) ){
 			$id=$_POST['datos'];
 		}else{
-			$id=$_POST[$this->pk];
+			$id=$_POST[$modObj->pk];
 		}
-		$params[$this->pk]=$id;
 		
-		$res=$modObj->borrar($params);
+		if (empty($id) ){			
+			$response=array(
+				'success'=>false,
+				'msg'=>'Seleccione un elemento'
+			);
+		}else{
+			$params[$modObj->pk]=$id;
 		
-		$response=array(
-			'success'=>$res,
-			'msg'=>'Registro Eliminado'
-		);
+			$res=$modObj->borrar($params);
+			
+			$response=array(
+				'success'=>$res,
+				'msg'=>'Registro Eliminado'
+			);
+			
+		}
 		echo json_encode($response);
-		exit;
+		
 	}
 }
 ?>
