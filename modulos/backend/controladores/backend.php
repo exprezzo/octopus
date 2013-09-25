@@ -1,4 +1,7 @@
 <?php
+/**
+  * @package Backend
+  */	
 require_once $_PETICION->basePath.'/modelos/catalogo_modelo.php';
 require_once $_PETICION->basePath.'/modelos/modulo_modelo.php';
 
