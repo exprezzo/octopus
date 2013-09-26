@@ -47,13 +47,19 @@ class Modelo implements ICrud{
 	
 	function execute($sth){
 		//Ejecuta el statement y revisa errores
+		
 		$exito = $sth->execute();
 			
 		$msg='';
 		if ($exito!==true){
 			$error=$sth->errorInfo();			
 			$success=false;
-			$msg=$error[2];						
+			$msg=$error[2];				
+			if ($msg=='MySQL server has gone away'){
+				$db=Database::getInstance();
+				$db->reconectar();
+				return $this->execute($sth);
+			}
 			$datos=array();
 		}else{
 			$datos = $sth->fetchAll(PDO::FETCH_ASSOC);
