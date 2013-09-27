@@ -135,7 +135,9 @@ class Modelo implements ICrud{
 		$id=$params[$this->pk];
 		// $nombre=$params['nombre'];
 		
+		$nuevo = false;
 		if ( empty($id) ){
+			$nuevo = true;
 			//           CREAR
 			// $sql='INSERT INTO '.$this->tabla.' SET nombre=:nombre, fecha_de_creacion= now()';
 			$sql='INSERT INTO '.$this->tabla.' SET ';
@@ -193,7 +195,9 @@ class Modelo implements ICrud{
 			);
 		}
 		
-		
+		//si es nuevo, y success, se agrega una relacion entre el usuario y la razon social, en una transaccion
+		//si no es nuevo, se completa la transaccion
+		//se es un error, rollback.
 		
 		return array(
 			'success'	=>$success,			
@@ -230,12 +234,20 @@ class Modelo implements ICrud{
 	
 	
 	function cadenaDeFiltros($filtros){
-		$cadena=' WHERE ';
+		$cadena=' WHERE ( ';
 		foreach($filtros as $filtro){
 			$field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
 			// $field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
 			switch( strtolower( $filtro['filterOperator'] ) ){
-				case 'equals':				
+				case 'equals':	
+					// 
+					if ( is_numeric($filtro['filterValue']) ){
+						$cadena.=' '.$field.' = :'.$filtro['dataKey'].' or ';
+					}else{
+						$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' or ';
+					}
+					
+				break;
 				case 'contains':				
 				case 'beginswith':					
 				case 'endswith':
@@ -259,7 +271,54 @@ class Modelo implements ICrud{
 			}
 		}		
 		$cadena = substr($cadena, 0,-4);		
-		return $cadena;
+		return $cadena.' ) ';
+	}
+	
+	
+	function cadenaDeFiltrosAnd($filtros, $cadena){
+		
+		if (empty($cadena) ){
+			$cadena=' WHERE (';
+		}else{
+			$cadena.=' AND ( ';
+		}
+		foreach($filtros as $filtro){
+			$field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
+			// $field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
+			switch( strtolower( $filtro['filterOperator'] ) ){
+				case 'equals':	
+					// 
+					if ( is_numeric($filtro['filterValue']) ){
+						$cadena.=' '.$field.' = :'.$filtro['dataKey'].' and ';
+					}else{
+						$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' and ';
+					}
+					
+				break;
+				case 'contains':				
+				case 'beginswith':					
+				case 'endswith':
+					$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' and ';
+				break;
+				case 'greater':				
+					$cadena.=' '.$field.' > :'.$filtro['dataKey'].' and ';
+				break;
+				case 'greaterorequal':
+					$cadena.=' '.$field.' >= :'.$filtro['dataKey'].' and ';
+				break;
+				case 'isempty':
+					$cadena.=' '.$field.' = "" and ';
+				break;
+				case 'lessorequal':
+					$cadena.=' '.$field.' <= :'.$filtro['dataKey'].' and ';
+				break;				
+				case 'less':
+					$cadena.=' '.$field.' < :'.$filtro['dataKey'].' and ';
+				break;				
+			}
+		}		
+		$cadena = substr($cadena, 0,-5);		
+		return $cadena.' ) ';
 	}
 	
 	function bindFiltros($sth,$filtros){
@@ -267,8 +326,13 @@ class Modelo implements ICrud{
 			$dk=$filtro['dataKey'];			
 			$dk=':'.$dk;	
 			switch( strtolower( $filtro['filterOperator'] ) ){
-				case 'equals':										
-					$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_STR);
+				case 'equals':		
+					if (is_numeric($filtro['filterValue']) ){
+						$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_INT);
+					}else{
+						$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_STR);
+					}
+					
 				break;
 				case 'contains':						
 					$sth->bindValue($dk, '%'.$filtro['filterValue'].'%', PDO::PARAM_STR);																				
@@ -310,12 +374,18 @@ class Modelo implements ICrud{
 		if ( isset($params['filtros']) )
 			$filtros=$this->cadenaDeFiltros($params['filtros']);
 			
+		if ( isset($params['filtrosAnd']) )
+			$filtros=$this->cadenaDeFiltrosAnd($params['filtrosAnd'],$filtros);
+			
 		
 		$sql = 'SELECT COUNT(*) as total FROM '.$this->tabla.$filtros;				
 		$sth = $con->prepare($sql);
 		
 		if ( isset($params['filtros']) ){
 			$this->bindFiltros($sth, $params['filtros']);
+		}
+		if ( isset($params['filtrosAnd']) ){
+			$this->bindFiltros($sth, $params['filtrosAnd']);
 		}
 		
 		

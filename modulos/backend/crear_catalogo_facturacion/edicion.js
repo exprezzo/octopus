@@ -147,13 +147,15 @@
 		var datos=paramObj;
 		
 		//Envia los datos al servidor, el servidor responde success true o false.
-		
+		$("#contenedorDatos2").block({ 
+			message: '<h1>Guardando</h1>'               
+		}); 
 		$.ajax({
 			type: "POST",
 			url: kore.url_base+this.configuracion.modulo.nombre+'/'+this.controlador.nombre+'/guardar',
 			data: { datos: datos}
 		}).done(function( response ) {
-			
+			$("#contenedorDatos2").unblock(); 
 			var resp = eval('(' + response + ')');
 			var msg= (resp.msg)? resp.msg : '';
 			var title;
