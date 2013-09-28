@@ -12,43 +12,41 @@ class Database{
 	/**
 	 * La funcion es privada para impedir crear mas de una instancia, en lugar de esta, use Database::getInstance()
 	 */
+	 function conectar(){
+		if ( !empty($_SESSION['isLoged']) && !empty($_SESSION['DB_CONFIG']) ){
+			$DB_CONFIG=array(
+				'DB_SERVER'=>$_SESSION['DB_CONFIG']['host'],
+				'DB_NAME'=>$_SESSION['DB_CONFIG']['db_name'],
+				'DB_USER'=>$_SESSION['DB_CONFIG']['db_user'],
+				'DB_PASS'=>$_SESSION['DB_CONFIG']['db_pass']
+			);
+		}else{
+			global $DB_CONFIG;
+		}
+		
+		try {
+			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG{'DB_NAME'}.';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
+				PDO::ATTR_PERSISTENT => false
+			));				
+			$this->pdo=$db;
+		} catch (PDOException $e) {			
+			
+			//$msg='Error al conectarse con la base de datos';
+			$msg=$e->getMessage();
+			
+			$resp=array(
+				'success'=>false,
+				'msg'=>$msg
+			);			
+			throw new Exception($msg);			
+		}
+	 }
 	function reconectar(){
-		global $DB_CONFIG;
-		try {
-			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG{'DB_NAME'}.';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
-				PDO::ATTR_PERSISTENT => false
-			));				
-			$this->pdo=$db;
-		} catch (PDOException $e) {			
-			
-			//$msg='Error al conectarse con la base de datos';
-			$msg=$e->getMessage();
-			
-			$resp=array(
-				'success'=>false,
-				'msg'=>$msg
-			);			
-			throw new Exception($msg);			
-		}
+		return $this->conectar();
+		
 	}
-    private function __construct(){
-		global $DB_CONFIG;
-		try {
-			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG{'DB_NAME'}.';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
-				PDO::ATTR_PERSISTENT => false
-			));				
-			$this->pdo=$db;
-		} catch (PDOException $e) {			
-			
-			//$msg='Error al conectarse con la base de datos';
-			$msg=$e->getMessage();
-			
-			$resp=array(
-				'success'=>false,
-				'msg'=>$msg
-			);			
-			throw new Exception($msg);			
-		}
+    private function __construct(){		
+		$this->conectar();
     }
    
 	/**
