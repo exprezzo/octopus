@@ -12,8 +12,11 @@ class Database{
 	/**
 	 * La funcion es privada para impedir crear mas de una instancia, en lugar de esta, use Database::getInstance()
 	 */
-	 function conectar(){
-		if ( !empty($_SESSION['isLoged']) && !empty($_SESSION['DB_CONFIG']) ){
+	 function conectar( $DB_CONFIG=array() ){
+		if ( !empty($DB_CONFIG) ){
+			//ASI SE KEDA
+		} else if ( !empty($_SESSION['isLoged']) && !empty($_SESSION['DB_CONFIG']) ){
+			// print_r($_SESSION);
 			$DB_CONFIG=array(
 				'DB_SERVER'=>$_SESSION['DB_CONFIG']['host'],
 				'DB_NAME'=>$_SESSION['DB_CONFIG']['db_name'],
@@ -25,8 +28,9 @@ class Database{
 		}
 		
 		try {
-			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG{'DB_NAME'}.';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
-				PDO::ATTR_PERSISTENT => false
+			// echo $DB_CONFIG{'DB_NAME'}
+			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG['DB_NAME'].';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
+				PDO::ATTR_PERSISTENT => true
 			));				
 			$this->pdo=$db;
 		} catch (PDOException $e) {			
@@ -41,9 +45,9 @@ class Database{
 			throw new Exception($msg);			
 		}
 	 }
-	function reconectar(){
-		return $this->conectar();
-		
+	 
+	function reconectar( $DB_CONFIG=array() ){
+		return $this->conectar( $DB_CONFIG=array() );		
 	}
     private function __construct(){		
 		$this->conectar();

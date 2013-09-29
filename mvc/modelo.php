@@ -132,7 +132,7 @@ class Modelo implements ICrud{
 	function guardar( $params ){
 		$dbh=$this->getConexion();
 		
-		$id=$params[$this->pk];
+		$id=empty($params[$this->pk])? 0 : $params[$this->pk] ;
 		// $nombre=$params['nombre'];
 		
 		$nuevo = false;
