@@ -13,6 +13,7 @@ class Database{
 	 * La funcion es privada para impedir crear mas de una instancia, en lugar de esta, use Database::getInstance()
 	 */
 	 function conectar( $DB_CONFIG=array() ){
+		// print_r($DB_CONFIG);
 		if ( !empty($DB_CONFIG) ){
 			//ASI SE KEDA
 		} else if ( !empty($_SESSION['isLoged']) && !empty($_SESSION['DB_CONFIG']) ){
@@ -28,15 +29,17 @@ class Database{
 		}
 		
 		try {
-			// echo $DB_CONFIG{'DB_NAME'}
+			 
 			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG['DB_NAME'].';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
 				PDO::ATTR_PERSISTENT => true
 			));				
 			$this->pdo=$db;
+			$msg='Conectado a la BD';
 		} catch (PDOException $e) {			
 			
-			//$msg='Error al conectarse con la base de datos';
+			
 			$msg=$e->getMessage();
+			$msg='Error al conectarse con la base de datos';
 			
 			$resp=array(
 				'success'=>false,
@@ -44,10 +47,15 @@ class Database{
 			);			
 			throw new Exception($msg);			
 		}
+		$resp=array(
+			'success'=>true,
+			'msg'=>$msg
+		);	
+			return $resp;
 	 }
 	 
 	function reconectar( $DB_CONFIG=array() ){
-		return $this->conectar( $DB_CONFIG=array() );		
+		return $this->conectar( $DB_CONFIG );		
 	}
     private function __construct(){		
 		$this->conectar();
