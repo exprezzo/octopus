@@ -27,13 +27,16 @@ class Database{
 		}else{
 			global $DB_CONFIG;
 		}
-		
+		   
 		try {
 			 
 			$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG['DB_NAME'].';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
 				PDO::ATTR_PERSISTENT => true
 			));				
 			$this->pdo=$db;
+			$db->exec('USE '.$DB_CONFIG['DB_NAME']);
+			// echo 'USE '.$DB_CONFIG['DB_NAME'];
+			
 			$msg='Conectado a la BD';
 		} catch (PDOException $e) {			
 			
