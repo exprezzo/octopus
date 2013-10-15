@@ -133,7 +133,8 @@ class Controlador{
 		}
 		$respuesta=array(
 			'rows'=>$res['datos'],
-			'totalRows'=> $res['total']
+			'totalRows'=> $res['total'],
+			'success'=>true
 		);
 		
 		echo json_encode($respuesta);
@@ -208,7 +209,7 @@ class Controlador{
 			
 		}
 		echo json_encode($response);
-		
+		return $response;
 	}
 }
 ?>

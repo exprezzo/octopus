@@ -52,8 +52,8 @@ class '.$nombreControlador.' extends Controlador{
 	function guardar(){
 		return parent::guardar();
 	}
-	function borrar(){
-		return parent::borrar();
+	function eliminar(){
+		return parent::eliminar();
 	}
 	function editar(){
 		global $_PETICION;
