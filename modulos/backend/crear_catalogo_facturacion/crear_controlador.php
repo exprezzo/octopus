@@ -50,7 +50,24 @@ class '.$nombreControlador.' extends Controlador{
 	}
 	
 	function guardar(){
-		return parent::guardar();
+		$modelo=$this->getModelo();
+		$esNuevo = empty( $_POST[\'datos\'][$modelo->pk] );
+		
+		ob_start();
+		$res = parent::guardar();
+		ob_end_clean();
+		
+		if ( !$res[\'success\'] ){			
+			echo json_encode($res);
+			return $res;
+		}
+		
+		if ( $esNuevo ){					
+			$res[\'esNuevo\']=true;				
+			$_SESSION[\'res\']=$res;
+		}
+		echo json_encode($res);
+		return $res;
 	}
 	function eliminar(){
 		return parent::eliminar();

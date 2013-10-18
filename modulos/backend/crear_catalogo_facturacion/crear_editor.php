@@ -33,7 +33,34 @@ $contenido='
 <script src="<?php echo $_PETICION->url_web; ?>js/catalogos/<?php echo $_PETICION->controlador; ?>/edicion.js"></script>
 
 <script>			
-	$( function(){		
+	$( function(){	
+		
+		//---------------------
+		<?php
+		$resAnt = empty($_SESSION[\'res\']) ? array() : $_SESSION[\'res\'];
+		unset($_SESSION[\'res\']);
+		?>
+		var resAnt = <?php echo json_encode($resAnt); ?>;
+		
+		if (resAnt.success != undefined ){			
+			var title=\'\', msg	=resAnt.msg, icon=\'\';
+			if(resAnt.success){
+				icon=kore.url_web+\'imagenes/yes.png\';
+				title= \'Success\';					
+			}else{
+				icon= kore.url_web+\'imagenes/error.png\';
+				title= \'Error\';
+			}
+			
+			$.gritter.add({
+				position: \'bottom-left\',
+				title:title,
+				text: msg,
+				image: icon,
+				class_name: \'my-sticky-class\'
+			});
+		}
+		//---------------------
 		var config={
 			tab:{
 				id:\'<?php echo $_REQUEST[\'tabId\']; ?>\'

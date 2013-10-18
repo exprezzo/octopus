@@ -146,6 +146,7 @@
 		//-----------------------------------
 		var datos=paramObj;
 		
+				
 		//Envia los datos al servidor, el servidor responde success true o false.
 		$("#contenedorDatos2").block({ 
 			message: '<h1>Guardando</h1>'               
@@ -167,6 +168,9 @@
 					icon=kore.url_web+'imagenes/info.png';
 				}
 				
+				if (resp.esNuevo){					
+					window.location = kore.url_base+me.configuracion.modulo.nombre+'/'+me.controlador.nombre+'/editar/'+ resp.datos.id;
+				}
 				title= 'Success';				
 				// tab.find('[name="'+me.configuracion.pk+'"]').val(resp.datos[me.configuracion.pk]);
 				tab.find('[name="'+me.configuracion.pk+'"]').val(resp.datos[me.configuracion.pk]);
