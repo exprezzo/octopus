@@ -286,14 +286,15 @@ class Modelo implements ICrud{
 			$field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
 			// $field=empty($filtro['field'])? $filtro['dataKey'] : $filtro['field'];		
 			switch( strtolower( $filtro['filterOperator'] ) ){
-				case 'equals':	
-					// 
+				case 'equals':
 					if ( is_numeric($filtro['filterValue']) ){
 						$cadena.=' '.$field.' = :'.$filtro['dataKey'].' and ';
 					}else{
 						$cadena.=' '.$field.' LIKE :'.$filtro['dataKey'].' and ';
 					}
-					
+				break;
+				case 'distinct':
+					$cadena.=' '.$field.' != :'.$filtro['dataKey'].' and ';
 				break;
 				case 'contains':				
 				case 'beginswith':					
@@ -308,6 +309,9 @@ class Modelo implements ICrud{
 				break;
 				case 'isempty':
 					$cadena.=' '.$field.' = "" and ';
+				break;
+				case 'isnull':
+					$cadena.=' '.$field.' IS NULL and ';
 				break;
 				case 'lessorequal':
 					$cadena.=' '.$field.' <= :'.$filtro['dataKey'].' and ';
@@ -333,6 +337,10 @@ class Modelo implements ICrud{
 						$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_STR);
 					}
 					
+				break;
+				case 'distinct':
+					// $cadena.=' '.$field.' != :'.$filtro['dataKey'].' and ';
+					$sth->bindValue($dk, $filtro['filterValue'], PDO::PARAM_INT);
 				break;
 				case 'contains':						
 					$sth->bindValue($dk, '%'.$filtro['filterValue'].'%', PDO::PARAM_STR);																				
@@ -375,8 +383,7 @@ class Modelo implements ICrud{
 			$filtros=$this->cadenaDeFiltros($params['filtros']);
 			
 		if ( isset($params['filtrosAnd']) )
-			$filtros=$this->cadenaDeFiltrosAnd($params['filtrosAnd'],$filtros);
-			
+			$filtros=$this->cadenaDeFiltrosAnd($params['filtrosAnd'],$filtros);			
 		
 		$sql = 'SELECT COUNT(*) as total FROM '.$this->tabla.$filtros;				
 		$sth = $con->prepare($sql);

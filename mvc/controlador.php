@@ -126,6 +126,10 @@ class Controlador{
 			$params['filtros']=$_REQUEST['filtering'];
 		}
 		
+		if ( isset($_REQUEST['filtrosAnd']) ){
+			$params['filtrosAnd']=$_REQUEST['filtrosAnd'];
+		}
+		
 		$res=$mod->buscar($params);				
 		
 		if ( !$res['success'] ) {
