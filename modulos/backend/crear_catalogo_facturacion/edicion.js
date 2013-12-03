@@ -161,7 +161,7 @@
 			try{
 				var resp = eval('(' + response + ')');
 			}catch(err){
-				msg='El servidor no ha respondido de manera correcta. <br />'+response;
+				msg='El servidor ha respondido de manera incorrecta. <br />'+response;
 				title='Error al generar los archivos';
 				icon= kore.url_web+'imagenes/error.png';
 				$.gritter.add({
