@@ -5,6 +5,9 @@ class usuarios extends Controlador{
 	var $modelo="Usuario";
 	var $campos=array('id','nick','pass','email','rol','fbid','name','picture','originalName');
 	var $accionesPublicas=array('login');
+	function getModel(){
+		return $this->getModelo();
+	}
 	function mostrarVista($vistaFile=''){
 		
 		$vista=$this->getVista();

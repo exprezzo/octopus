@@ -157,9 +157,24 @@
 			data: { datos: datos}
 		}).done(function( response ) {
 			$("#contenedorDatos2").unblock(); 
-			var resp = eval('(' + response + ')');
-			var msg= (resp.msg)? resp.msg : '';
-			var title;
+			var msg, title, icon;
+			try{
+				var resp = eval('(' + response + ')');
+			}catch(err){
+				msg='El servidor no ha respondido de manera correcta. <br />'+response;
+				title='Error al generar los archivos';
+				icon= kore.url_web+'imagenes/error.png';
+				$.gritter.add({
+					position: 'bottom-left',
+					title:title,
+					text: msg,
+					image: icon,
+					class_name: 'my-sticky-class'
+				});
+			}
+			// var resp = eval('(' + response + ')');
+			msg= (resp.msg)? resp.msg : '';
+			
 			
 			if ( resp.success == true	){
 				if (resp.msgType!=undefined && resp.msgType == 'info'){

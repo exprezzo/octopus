@@ -173,6 +173,7 @@ class Modelo implements ICrud{
 			
 			$msg=$this->nombre.' Actualizado';	
 		}
+		
 		$success = $sth->execute();
 		
 		$errCode = 0;

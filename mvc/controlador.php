@@ -19,12 +19,13 @@ class Controlador{
 	function servir(){		
 		global $_PETICION;
 		$accion = $_PETICION->accion;
-		
+		global $APP_CONFIG;
 		if ($this->revisarSession){		
 			if ( !in_array($accion, $this->accionesPublicas ) ){				
 				if ( !isset($_SESSION['isLoged']) || $_SESSION['isLoged']==false ){
 					$_SESSION['_PETICION'] = '/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];					
-					header('Location: '.$_PETICION->url_app.'usuarios/login');
+					header('Location: '.$_PETICION->url_app.$APP_CONFIG['_LOGIN_REDIRECT_PATH']);
+					
 					return true;
 				}
 			}

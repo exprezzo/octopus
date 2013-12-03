@@ -45,13 +45,13 @@ class  Vista{
 		global $_PETICION, $APP_CONFIG;
 		$rutaVista=$peticion->ruta_presentacion.$layout.'.php';											
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;	
-		if ($vista_existe) {			
-			require_once($rutaVista);			
+		if ($vista_existe) {
+			require_once($rutaVista);
 			$success=true;
 			$msg='accion render ejecutada con éxito';
-		}else{			
-			$msg='El recurso no ha sido encontrado: '.$rutaVista;			
-			echo $msg; 			
+		}else{
+			$msg='El recurso no ha sido encontrado: '.$rutaVista;
+			// echo $msg;
 		}
 		
 		return array(
@@ -87,10 +87,10 @@ class  Vista{
 			$msg='accion render ejecutada con éxito';
 		}else{
 			
-			// $success=false;
+			$success=false;
 			$msg='El recurso no ha sido encontrado: '.$rutaVista;
 			
-			echo $msg; 
+			// echo $msg; 
 			// exit;
 			// header("HTTP/1.0 404".$msg); // exit;
 		}
