@@ -1,12 +1,47 @@
-<?php		
+<?php
 /**
   * @package Core
-  */	
+  */
 	//  AQUI INICIA EL PROCESO
-	function my_autoloader($class) {		
+	function my_autoloader($class) {
 		global $_PETICION;	
 	}
-
+	
+	function logout(){
+		global $_PETICION;		
+		unset($_SESSION[$_PETICION->modulo]);
+	}
+	
+	function getSessionVar($varName){
+		global $_PETICION;				
+		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+	}
+	
+	function sessionGet($varName){
+		global $_PETICION;				
+		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+	}
+	
+	function sessionAdd($llave, $valor){
+		global $_PETICION;		
+		$_SESSION[$_PETICION->modulo][$llave]=$valor;
+	}
+	
+	function isLoged(){
+		global $_PETICION;		 
+		return ( empty($_SESSION[$_PETICION->modulo]) || empty($_SESSION[$_PETICION->modulo]['isLoged']) )? false : true;
+	}
+	
+	function addUser($user){
+		global $_PETICION;		
+		$_SESSION[$_PETICION->modulo]['user']=$user;
+	}
+	
+	function getUser(){
+		global $_PETICION;		
+		return $_SESSION[$_PETICION->modulo]['user'];		
+	}
+	
 	spl_autoload_register(__NAMESPACE__.'\my_autoloader');
 	session_start();	
 	//-------------------------------------------------------------------------------		
@@ -21,7 +56,7 @@
 	if (!isset($_DEFAULT_CONTROLLER) ) $_DEFAULT_CONTROLLER='paginas';
 	if (!isset($_DEFAULT_ACTION) ) $_DEFAULT_ACTION='inicio';		
 	if (!isset($APPS_PATH) ) $APPS_PATH='../';	 //ruta relativa de la aplicacion
-	if (!isset($CORE_PATH)) $CORE_PATH='';
+	if (!isset($CORE_PATH)) $CORE_PATH='';	// para las pruebas unitarias
 	
 	require_once 'clases/peticion.php';
 	require_once 'mvc/vista.php';	
@@ -37,6 +72,9 @@
 			$_SERVER['PATH_INFO'] = $_SERVER['ORIG_PATH_INFO'];
 		}
 		$_PETICION=new Peticion( $_SERVER['PATH_INFO'] ); //Analiza el url		
+		// session_name( $_PETICION->modulo );
+		// echo session_name(); 
+		// print_r( $_SESSION ); exit;
 		// $_PETICION->establecerRutas();	
 		
 		//Una vez obtenido el modulo, se revisa que exista la carpeta.		

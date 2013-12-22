@@ -22,10 +22,11 @@ class Controlador{
 		global $APP_CONFIG;
 		if ($this->revisarSession){		
 			if ( !in_array($accion, $this->accionesPublicas ) ){				
-				if ( !isset($_SESSION['isLoged']) || $_SESSION['isLoged']==false ){
-					$_SESSION['_PETICION'] = '/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];					
-					header('Location: '.$_PETICION->url_app.$APP_CONFIG['_LOGIN_REDIRECT_PATH']);
-					
+				if ( !isLoged() ){
+					$peticion='/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];
+					sessionAdd('_PETICION',$peticion);
+					// $_SESSION[$_PETICION->modulo]['_PETICION'] = ;
+					header('Location: '.$_PETICION->url_app.$APP_CONFIG['_LOGIN_REDIRECT_PATH']);					
 					return true;
 				}
 			}

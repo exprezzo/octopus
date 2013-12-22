@@ -16,14 +16,21 @@ class Database{
 		// print_r($DB_CONFIG);
 		if ( !empty($DB_CONFIG) ){
 			//ASI SE KEDA
-		} else if ( !empty($_SESSION['isLoged']) && !empty($_SESSION['DB_CONFIG']) ){
-			// print_r($_SESSION);
-			$DB_CONFIG=array(
-				'DB_SERVER'=>$_SESSION['DB_CONFIG']['host'],
-				'DB_NAME'=>$_SESSION['DB_CONFIG']['db_name'],
-				'DB_USER'=>$_SESSION['DB_CONFIG']['db_user'],
-				'DB_PASS'=>$_SESSION['DB_CONFIG']['db_pass']
-			);
+		} else if ( isLoged()  ){
+			$DB_CONFIG=getSessionVar('DB_CONFIG');
+			if ( !empty($DB_CONFIG) ){
+				$DB_CONFIG=array(
+					'DB_SERVER'=>$_SESSION['DB_CONFIG']['host'],
+					'DB_NAME'=>$_SESSION['DB_CONFIG']['db_name'],
+					'DB_USER'=>$_SESSION['DB_CONFIG']['db_user'],
+					'DB_PASS'=>$_SESSION['DB_CONFIG']['db_pass']
+				);
+			}else{
+				global $DB_CONFIG;
+			}
+			
+			
+			
 		}else{
 			global $DB_CONFIG;
 		}
