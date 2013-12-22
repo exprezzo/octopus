@@ -36,6 +36,17 @@
 		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
 	}
 	
+	function sessionUnset($varName){
+		global $_PETICION;				
+		unset( $_SESSION[$_PETICION->modulo][$varName] );
+		// return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+	}
+	
+	function sessionSet($llave, $valor){
+		global $_PETICION;		
+		$_SESSION[$_PETICION->modulo][$llave]=$valor;
+	}
+	
 	function sessionAdd($llave, $valor){
 		global $_PETICION;		
 		$_SESSION[$_PETICION->modulo][$llave]=$valor;

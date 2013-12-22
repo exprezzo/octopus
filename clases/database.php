@@ -20,10 +20,10 @@ class Database{
 			$DB_CONFIG=getSessionVar('DB_CONFIG');
 			if ( !empty($DB_CONFIG) ){
 				$DB_CONFIG=array(
-					'DB_SERVER'=>$_SESSION['DB_CONFIG']['host'],
-					'DB_NAME'=>$_SESSION['DB_CONFIG']['db_name'],
-					'DB_USER'=>$_SESSION['DB_CONFIG']['db_user'],
-					'DB_PASS'=>$_SESSION['DB_CONFIG']['db_pass']
+					'DB_SERVER'=>$DB_CONFIG['host'],
+					'DB_NAME'=>$DB_CONFIG['db_name'],
+					'DB_USER'=>$DB_CONFIG['db_user'],
+					'DB_PASS'=>$DB_CONFIG['db_pass']
 				);
 			}else{
 				global $DB_CONFIG;
