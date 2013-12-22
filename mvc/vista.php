@@ -38,9 +38,10 @@ class  Vista{
 	}
 	
 	function mostrarTema($peticion, $tema, $layout=''){
+		
 		if ( empty($layout) ){
 			global $_DEFAUL_LAYOUT;
-			$layout = $_DEFAUL_LAYOUT;
+			$layout = $_DEFAUL_LAYOUT;			
 		}
 		global $_PETICION, $APP_CONFIG;
 		$rutaVista=$peticion->ruta_presentacion.$layout.'.php';											
@@ -51,7 +52,7 @@ class  Vista{
 			$msg='accion render ejecutada con éxito';
 		}else{
 			$msg='El recurso no ha sido encontrado: '.$rutaVista;
-			// echo $msg;
+			$success=false;			
 		}
 		
 		return array(

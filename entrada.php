@@ -7,13 +7,27 @@
 		global $_PETICION;	
 	}
 	
+	function getModelo($modelo){
+		//incluye el archivo del modelo, y devuelve una instancia
+		// verifica si existe
+		$ruta='_modelo.php';
+		if (file_exists($ruta) ){
+			require_once $ruta;
+			
+			return new $modelo();
+		}else{
+			throw new Exception("El archivo no existe. ($ruta)");
+		}
+		
+	}
+	
 	function logout(){
 		global $_PETICION;		
 		unset($_SESSION[$_PETICION->modulo]);
 	}
 	
 	function getSessionVar($varName){
-		global $_PETICION;				
+		global $_PETICION;
 		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
 	}
 	
@@ -47,10 +61,11 @@
 	//-------------------------------------------------------------------------------		
 	ini_set('date.timezone', 'America/Mazatlan');	
 	//carga el archivo de configuracion por default //¿Podemos omitir este archivo?	
-	require_once '../config.php';			
+	// require_once '../config.php';			
+	
 	//las variables por default.
 	if (!isset($_TEMA_APP) ) $_TEMA_APP='default';
-	if (!isset($_DEFAUL_LAYOUT) ) $_DEFAUL_LAYOUT='layout';
+	// if (!isset($_DEFAUL_LAYOUT) ) $_DEFAUL_LAYOUT='layout';
 	
 	if (!isset($_DEFAULT_APP) ) $_DEFAULT_APP='portal';		
 	if (!isset($_DEFAULT_CONTROLLER) ) $_DEFAULT_CONTROLLER='paginas';
@@ -72,35 +87,16 @@
 			$_SERVER['PATH_INFO'] = $_SERVER['ORIG_PATH_INFO'];
 		}
 		$_PETICION=new Peticion( $_SERVER['PATH_INFO'] ); //Analiza el url		
-		// session_name( $_PETICION->modulo );
-		// echo session_name(); 
-		// print_r( $_SESSION ); exit;
-		// $_PETICION->establecerRutas();	
 		
-		//Una vez obtenido el modulo, se revisa que exista la carpeta.		
-		
-		
-		// if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
-			// $APPS_PATH='modulos/';
-			// $MOD_WEB_PATH=$_PETICION->url_web.'modulos/'.$_PETICION->modulo.'/';
-			// if ( !file_exists($APPS_PATH.$_PETICION->modulo) ){
-				// throw new Exception("carpeta de aplicacion no encontrada");
-			// }			
-		// }	
-
-			// print_r($_PETICION);
-		//y se carga el archivo de configuracion del modulo
-		// $configPath=$APPS_PATH.$_PETICION->modulo.'/config.php';
-		if ( file_exists($_PETICION->ruta_archivos) ){
-			if ( file_exists($_PETICION->ruta_archivos.'/config.php') ){
+		if ( file_exists($_PETICION->ruta_archivos) ){			
+			if ( file_exists($_PETICION->ruta_archivos.'/config.php') ){				
 				require_once $_PETICION->ruta_archivos.'/config.php';
-			}
-			
+			}			
 		}
 		
 					
 		$rutaControlador = $_PETICION->ruta_archivos.'/controladores/'.$_PETICION->controlador.'.php';			
-		// $_PETICION->basePath=$APPS_PATH.$_PETICION->modulo.'/';
+		
 		$APPS_PATH = $_PETICION->basePath;
 		if ( file_exists($rutaControlador) ){
 			require_once ($rutaControlador);
