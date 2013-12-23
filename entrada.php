@@ -10,10 +10,12 @@
 	function getModelo($modelo){
 		//incluye el archivo del modelo, y devuelve una instancia
 		// verifica si existe
-		$ruta='_modelo.php';
+		global $_PETICION;
+		// print_r($_PETICION);
+		$ruta=$_PETICION->ruta_archivos.'/modelos/'.$modelo.'.php';
 		if (file_exists($ruta) ){
 			require_once $ruta;
-			
+			$modelo.='Modelo';
 			return new $modelo();
 		}else{
 			throw new Exception("El archivo no existe. ($ruta)");
