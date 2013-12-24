@@ -104,7 +104,7 @@
 		if ( file_exists($_PETICION->ruta_archivos) ){			
 			if ( file_exists($_PETICION->ruta_archivos.'/config.php') ){				
 				require_once $_PETICION->ruta_archivos.'/config.php';
-			}			
+			}
 		}
 		
 					
@@ -122,7 +122,18 @@
 		}
 		
 		//  Todo el show, para poder hacer esto
-		$controller=new $_PETICION->controlador;		
+		$controller=new $_PETICION->controlador;
+		//-----PLUGINS-----
+		if ( !empty($_PLUGINS) ){			
+			foreach($_PLUGINS as $plugin){
+				$plugin = $plugin.'Plugin';
+				$plugin = new $plugin();
+				$controller->attach( $plugin );
+			}
+			
+		}
+		//-----------
+		
 		$respuesta = $controller->servir();		
 	}catch(Exception $e){		
 		echo 'Exception: '.$e->getMessage();		

@@ -2,9 +2,63 @@
 /**
   * @package Core
   */
-class Controlador{
+class Controlador implements SplSubject  {
 	var $modelo='Modelo';
-	
+	var $observers = array();	
+	/** */
+	 /**
+    * Attaches an SplObserver to
+    * the ExceptionHandler to be notified
+    * when an uncaught Exception is thrown.
+    *
+    * @param SplObserver        The observer to attach
+    * @return void
+    */
+    public function attach(SplObserver $obs)
+    {
+        $id = spl_object_hash($obs);
+        $this->observers[$id] = $obs;
+    }
+
+    /**
+    * Detaches the SplObserver from the
+    * ExceptionHandler, so it will no longer
+    * be notified when an uncaught Exception is thrown.
+    *
+    * @param SplObserver        The observer to detach
+    * @return void
+    */
+    public function detach(SplObserver $obs)
+    {
+        $id = spl_object_hash($obs);
+        unset($this->observers[$id]);
+    }
+
+    /**
+    * Notify all observers of the uncaught Exception
+    * so they can handle it as needed.
+    *
+    * @return void
+    */
+    public function notify()
+    {
+        foreach($this->observers as $obs)
+        {
+            $obs->update($this);
+        }
+    }
+
+    /**
+    * This is the method that should be set as the
+    * default Exception handler by the calling code.
+    *
+    * @return void
+    */
+    public function handle(Exception $e)
+    {
+        $this->exception = $e;
+        $this->notify();
+    }
 	/**
 	 * @var boolean $revisarSession
 	 Esta variable es usada para aplicar seguridad por default, o false para no revisar seguridad en ninguna funcion ni vista
@@ -19,13 +73,14 @@ class Controlador{
 	function servir(){		
 		global $_PETICION;
 		$accion = $_PETICION->accion;
+		$this->notify();
+		
 		global $APP_CONFIG;
 		if ($this->revisarSession){		
 			if ( !in_array($accion, $this->accionesPublicas ) ){				
 				if ( !isLoged() ){
 					$peticion='/'.$_SERVER['SERVER_NAME'].$_PETICION->url_app.$_SERVER['PATH_INFO'];
-					sessionAdd('_PETICION',$peticion);
-					// $_SESSION[$_PETICION->modulo]['_PETICION'] = ;
+					sessionAdd('_PETICION',$peticion);					
 					header('Location: '.$_PETICION->url_app.$APP_CONFIG['_LOGIN_REDIRECT_PATH']);					
 					return true;
 				}
