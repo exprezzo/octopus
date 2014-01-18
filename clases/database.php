@@ -19,12 +19,22 @@ class Database{
 		} else if ( isLoged()  ){
 			$DB_CONFIG=getSessionVar('DB_CONFIG');
 			if ( !empty($DB_CONFIG) ){
-				$DB_CONFIG=array(
-					'DB_SERVER'=>$DB_CONFIG['host'],
-					'DB_NAME'=>$DB_CONFIG['db_name'],
-					'DB_USER'=>$DB_CONFIG['db_user'],
-					'DB_PASS'=>$DB_CONFIG['db_pass']
-				);
+				if ( !empty($DB_CONFIG['DB_SERVER']) ){
+					// $DB_CONFIG=array(
+						// 'DB_SERVER'=>$DB_CONFIG['DB_SERVER'],
+						// 'DB_NAME'=>$DB_CONFIG['DB_NAME'],
+						// 'DB_USER'=>$DB_CONFIG['DB_USER'],
+						// 'DB_PASS'=>$DB_CONFIG['DB_PASS']
+					// );
+				}else{
+					$DB_CONFIG=array(
+						'DB_SERVER'=>$DB_CONFIG['host'],
+						'DB_NAME'=>$DB_CONFIG['db_name'],
+						'DB_USER'=>$DB_CONFIG['db_user'],
+						'DB_PASS'=>$DB_CONFIG['db_pass']
+					);
+				}
+				
 			}else{
 				global $DB_CONFIG;
 			}

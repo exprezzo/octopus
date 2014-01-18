@@ -25,48 +25,48 @@
 	
 	function logout(){
 		global $_PETICION;		
-		unset($_SESSION[$_PETICION->modulo]);
+		unset($_SESSION);
 	}
 	
 	function getSessionVar($varName){
 		global $_PETICION;
-		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+		return empty($_SESSION[$varName])? false: $_SESSION[$varName];
 	}
 	
 	function sessionGet($varName){
 		global $_PETICION;				
-		return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+		return empty($_SESSION[$varName])? false: $_SESSION[$varName];
 	}
 	
 	function sessionUnset($varName){
 		global $_PETICION;				
-		unset( $_SESSION[$_PETICION->modulo][$varName] );
-		// return empty($_SESSION[$_PETICION->modulo][$varName])? false: $_SESSION[$_PETICION->modulo][$varName];
+		unset( $_SESSION[$varName] );
+		// return empty($_SESSION[$varName])? false: $_SESSION[$varName];
 	}
 	
 	function sessionSet($llave, $valor){
 		global $_PETICION;		
-		$_SESSION[$_PETICION->modulo][$llave]=$valor;
+		$_SESSION[$llave]=$valor;
 	}
 	
 	function sessionAdd($llave, $valor){
 		global $_PETICION;		
-		$_SESSION[$_PETICION->modulo][$llave]=$valor;
+		$_SESSION[$llave]=$valor;
 	}
 	
 	function isLoged(){
 		global $_PETICION;		 
-		return ( empty($_SESSION[$_PETICION->modulo]) || empty($_SESSION[$_PETICION->modulo]['isLoged']) )? false : true;
+		return ( empty($_SESSION) || empty($_SESSION['isLoged']) )? false : true;
 	}
 	
 	function addUser($user){
 		global $_PETICION;		
-		$_SESSION[$_PETICION->modulo]['user']=$user;
+		$_SESSION['user']=$user;
 	}
 	
 	function getUser(){
 		global $_PETICION;		
-		return $_SESSION[$_PETICION->modulo]['user'];		
+		return $_SESSION['user'];		
 	}
 	
 	spl_autoload_register(__NAMESPACE__.'\my_autoloader');

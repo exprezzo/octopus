@@ -38,13 +38,16 @@ class  Vista{
 	}
 	
 	function mostrarTema($peticion, $tema, $layout=''){
-		
+		// echo $layout;
 		if ( empty($layout) ){
 			global $_DEFAUL_LAYOUT;
 			$layout = $_DEFAUL_LAYOUT;			
 		}
+		// echo $layout;
+		// print_r($peticion);
 		global $_PETICION, $APP_CONFIG;
-		$rutaVista=$peticion->ruta_presentacion.$layout.'.php';											
+		$rutaVista=$layout.'.php';											
+		// echo $rutaVista;
 		$vista_existe = ( file_exists($rutaVista) ) ? true : false;	
 		if ($vista_existe) {
 			require_once($rutaVista);
@@ -54,7 +57,7 @@ class  Vista{
 			$msg='El recurso no ha sido encontrado: '.$rutaVista;
 			$success=false;			
 		}
-		
+		// echo $msg;
 		return array(
 			'success'=>$success,
 			'msg'=>$msg
